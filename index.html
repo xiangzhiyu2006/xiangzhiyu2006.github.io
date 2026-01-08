@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CodeBlog - 专注前端技术的个人博客</title>
+    <link rel="icon" href="img/图标.png" type="img/png" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/index.css" />
+  </head>
+  <body>
+    <!-- 导航栏 -->
+    <header class="navbar-header">
+      <div class="navbar-container">
+        <nav class="main-nav">
+          <a href="index.html" class="logo">Code<span>Blog</span></a>
+
+          <!-- 汉堡菜单按钮 -->
+          <div class="hamburger" id="hamburger">
+            <i class="fas fa-bars"></i>
+          </div>
+
+          <ul class="nav-menu" id="navMenu">
+            <li class="nav-item">
+              <a href="index.html" class="nav-link active">首页</a>
+            </li>
+            <li class="nav-item">
+              <a href="博客.html" class="nav-link">博客</a>
+            </li>
+            <li class="nav-item">
+              <a href="作品集.html" class="nav-link">作品集</a>
+            </li>
+            <li class="nav-item">
+              <a href="关于我.html" class="nav-link">关于我</a>
+            </li>
+            <li class="nav-item">
+              <a href="文章示例.html" class="nav-link">文章示例</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- 首页核心内容区 -->
+    <main class="home-main">
+      <!-- 1. 横幅区域 -->
+      <section class="hero-section">
+        <div class="container">
+          <div class="hero-wrap">
+            <div class="hero-content">
+              <h1 class="hero-title">
+                大一学前端<br />
+                专注UI与静态页面开发
+              </h1>
+              <p class="hero-desc">
+                我是一名重庆的大一学生，记录Web前端学习之路，
+                分享HTML/CSS/UI设计的实战技巧，从0到1搭建精美静态页面，
+                和我一起夯实基础、积累实战经验！
+              </p>
+              <a href="#" class="btn hero-btn">
+                <i class="fa-solid fa-book-open"></i> 查看我的学习笔记
+              </a>
+            </div>
+            <div class="hero-img">
+              <img src="img/图片-1.webp" alt="前端学习展示" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. 最新博客列表 -->
+      <section class="latest-blog-section">
+        <div class="container">
+          <h2 class="section-title">
+            <i class="fa-solid fa-file-lines"></i> 最新博客
+          </h2>
+          <div class="blog-card-wrap">
+            <!-- 博客卡片1 -->
+            <article class="blog-card">
+              <img
+                src="img/图片-2.webp"
+                alt="HTML5语义化"
+                class="blog-card-img"
+              />
+              <div class="blog-card-content">
+                <div class="blog-meta">
+                  <span><i class="fa-solid fa-calendar"></i> 2026-01-05</span>
+                  <span><i class="fa-solid fa-tag"></i> HTML/CSS</span>
+                </div>
+                <h3 class="blog-card-title">
+                  <a href="#">HTML5语义化标签实战：提升SEO与页面可读性</a>
+                </h3>
+                <p class="blog-card-desc">
+                  告别滥用div标签的时代，详细讲解header、main、article等语义化标签的使用场景，
+                  以及如何通过语义化优化页面结构和搜索引擎收录效果。
+                </p>
+                <a href="#" class="blog-card-link">
+                  阅读更多 <i class="fa-solid fa-arrow-right"></i>
+                </a>
+              </div>
+            </article>
+
+            <!-- 博客卡片2 -->
+            <article class="blog-card">
+              <img
+                src="img/图片-3.webp"
+                alt="CSS Flex布局"
+                class="blog-card-img"
+              />
+              <div class="blog-card-content">
+                <div class="blog-meta">
+                  <span><i class="fa-solid fa-calendar"></i> 2026-01-03</span>
+                  <span><i class="fa-solid fa-tag"></i> CSS3</span>
+                </div>
+                <h3 class="blog-card-title">
+                  <a href="#">CSS Flex布局完全指南：解决90%的布局难题</a>
+                </h3>
+                <p class="blog-card-desc">
+                  从基础属性到实战案例，全面掌握Flex弹性布局，告别浮动布局的兼容性问题，
+                  快速实现居中、等分、自适应等常见布局需求。
+                </p>
+                <a href="#" class="blog-card-link">
+                  阅读更多 <i class="fa-solid fa-arrow-right"></i>
+                </a>
+              </div>
+            </article>
+
+            <!-- 博客卡片3 -->
+            <article class="blog-card">
+              <img
+                src="img/博客-4.webp"
+                alt="UI设计与前端还原"
+                class="blog-card-img"
+              />
+              <div class="blog-card-content">
+                <div class="blog-meta">
+                  <span><i class="fa-solid fa-calendar"></i> 2026-01-01</span>
+                  <span><i class="fa-solid fa-tag"></i> UI设计</span>
+                </div>
+                <h3 class="blog-card-title">
+                  <a href="#">UI设计实战：从原型图到前端像素级还原</a>
+                </h3>
+                <p class="blog-card-desc">
+                  新手也能学会的UI还原技巧，讲解如何分析设计稿的尺寸、颜色、间距，
+                  用CSS实现精准的视觉还原，让静态页面1:1匹配设计效果。
+                </p>
+                <a href="#" class="blog-card-link">
+                  阅读更多 <i class="fa-solid fa-arrow-right"></i>
+                </a>
+              </div>
+            </article>
+          </div>
+
+          <!-- 查看更多博客按钮 -->
+          <div class="more-blog-btn">
+            <a href="博客.html" class="btn">
+              <i class="fa-solid fa-list"></i> 查看更多博客
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. 侧边栏+推荐内容 -->
+      <section class="sidebar-section">
+        <div class="container">
+          <div class="sidebar-wrap">
+            <!-- 左侧推荐文章 -->
+            <div class="recommend-content">
+              <h2 class="section-title">
+                <i class="fa-solid fa-star"></i> 推荐文章
+              </h2>
+              <article class="recommend-article">
+                <img
+                  src="img/图片-5.webp"
+                  alt="Vue3实战"
+                  class="recommend-img"
+                />
+                <div class="recommend-article-content">
+                  <h3><a href="#">竞赛项目|重庆安防职业学院官网</a></h3>
+                  <p>
+                    基于Html，CSS，JS。 构建完整，包含首页、
+                    学校简介、校园生活等核心功能，点击即用。
+                  </p>
+                </div>
+              </article>
+            </div>
+
+            <!-- 右侧侧边栏 -->
+            <aside class="sidebar">
+              <!-- 博主简介 -->
+              <div class="sidebar-widget">
+                <h3 class="widget-title">关于我</h3>
+                <img src="img/头像.webp" alt="博主头像" class="avatar" />
+                <p class="author-desc">
+                  目前为大一学生，专注Web开发技术，
+                  热爱分享技术实战经验，期待与你共同成长。
+                </p>
+                <div class="social-links">
+                  <a href="#" class="social-link"
+                    ><i class="fa-brands fa-github"></i
+                  ></a>
+                  <a href="#" class="social-link"
+                    ><i class="fa-brands fa-weixin"></i
+                  ></a>
+                  <a href="#" class="social-link"
+                    ><i class="fa-brands fa-csdn"></i
+                  ></a>
+                </div>
+              </div>
+
+              <!-- 博客分类 -->
+              <div class="sidebar-widget">
+                <h3 class="widget-title">博客分类</h3>
+                <ul class="category-list">
+                  <li class="category-item">
+                    <a href="#"
+                      ><i class="fa-solid fa-folder-open"></i> HTML/CSS (12)</a
+                    >
+                  </li>
+                  <li class="category-item">
+                    <a href="#"
+                      ><i class="fa-solid fa-folder-open"></i> JavaScript (0)</a
+                    >
+                  </li>
+                  <li class="category-item">
+                    <a href="#"
+                      ><i class="fa-solid fa-folder-open"></i> 前端框架 (0)</a
+                    >
+                  </li>
+                  <li class="category-item">
+                    <a href="#"
+                      ><i class="fa-solid fa-folder-open"></i> 实战项目 (4)</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- 4. 页脚区域 -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-top">
+          <a href="#" class="footer-logo">Code<span>Blog</span></a>
+          <p class="footer-desc">专注前端技术分享，与开发者共同成长</p>
+        </div>
+
+        <div class="footer-middle">
+          <div class="footer-nav-wrap">
+            <h4>快速导航</h4>
+            <ul class="footer-nav">
+              <li><a href="index.html">首页</a></li>
+              <li><a href="博客.html">博客</a></li>
+              <li><a href="作品集.html">作品集</a></li>
+              <li><a href="关于我.html">关于我</a></li>
+              <li><a href="文章示例.html">文章示例</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-contact-wrap">
+            <h4>联系我</h4>
+            <ul class="footer-contact">
+              <li><i class="fa-solid fa-envelope"></i> 18623603181@163.com</li>
+              <li><i class="fa-brands fa-github"></i> github.com/codeblog</li>
+              <li><i class="fa-solid fa-location-dot"></i> 重庆市 · 綦江区</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>&copy; 2026 CodeBlog 版权所有 | 向治谕</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- 汉堡菜单交互JS -->
+    <script>
+      // 获取汉堡按钮和导航菜单元素
+      const hamburger = document.getElementById("hamburger");
+      const navMenu = document.getElementById("navMenu");
+
+      // 点击汉堡按钮切换导航菜单显示/隐藏
+      hamburger.addEventListener("click", () => {
+        // 切换导航菜单的active类
+        navMenu.classList.toggle("active");
+
+        // 切换汉堡图标（菜单/关闭）
+        const icon = hamburger.querySelector("i");
+        if (navMenu.classList.contains("active")) {
+          icon.classList.remove("fa-bars");
+          icon.classList.add("fa-times");
+        } else {
+          icon.classList.remove("fa-times");
+          icon.classList.add("fa-bars");
+        }
+      });
+
+      // 点击导航链接后自动收起菜单
+      const navLinks = document.querySelectorAll(".nav-link");
+      navLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          navMenu.classList.remove("active");
+          const icon = hamburger.querySelector("i");
+          icon.classList.remove("fa-times");
+          icon.classList.add("fa-bars");
+        });
+      });
+    </script>
+  </body>
+</html>

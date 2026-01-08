@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>前端导航栏开发实战 - CodeBlog</title>
+    <link rel="icon" href="img/图标.png" type="img/png" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/文章示例.css" />
+  </head>
+  <body>
+    <!-- 导航栏 -->
+    <header class="navbar-header">
+      <div class="navbar-container">
+        <nav class="main-nav">
+          <a href="index.html" class="logo">Code<span>Blog</span></a>
+
+          <!-- 汉堡菜单按钮 -->
+          <div class="hamburger" id="hamburger">
+            <i class="fas fa-bars"></i>
+          </div>
+
+          <ul class="nav-menu" id="navMenu">
+            <li class="nav-item">
+              <a href="index.html" class="nav-link">首页</a>
+            </li>
+            <li class="nav-item">
+              <a href="博客.html" class="nav-link">博客</a>
+            </li>
+            <li class="nav-item">
+              <a href="作品集.html" class="nav-link">作品集</a>
+            </li>
+            <li class="nav-item">
+              <a href="关于我.html" class="nav-link">关于我</a>
+            </li>
+            <li class="nav-item">
+              <a href="文章示例.html" class="nav-link active">文章示例</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- 文章内容区域 -->
+    <main class="article-container container">
+      <h1 class="article-title">前端导航栏开发实战：从基础到响应式优化</h1>
+      <div class="article-subtitle">
+        详解现代前端导航栏的设计思路、实现方式与移动端适配技巧
+      </div>
+      <div class="article-meta">
+        <div class="meta-item">
+          <i class="fas fa-calendar-alt"></i>
+          <span>2026-01-15</span>
+        </div>
+        <div class="meta-item">
+          <i class="fas fa-tag"></i>
+          <span>HTML/CSS</span>
+        </div>
+        <div class="meta-item">
+          <i class="fas fa-eye"></i>
+          <span>1258</span>
+        </div>
+      </div>
+      <div class="article-content">
+        <p>
+          导航栏（Navbar）是前端页面的核心组件之一，它承担着网站导航、品牌展示、用户交互等关键功能。一个优秀的导航栏不仅要美观，还要兼顾可用性、响应式适配和交互体验。本文将从实战角度，讲解如何开发一款符合现代设计规范的导航栏，包含基础布局、样式美化、交互效果和移动端适配。
+        </p>
+
+        <img
+          src="img/作品集-1.png"
+          alt="前端最终效果（桌面端）"
+          class="code-img"
+        />
+        <p class="img-caption">图1：导航栏桌面端最终效果展示</p>
+
+        <h2>一、导航栏核心设计原则</h2>
+        <p>在开发导航栏前，我们需要明确核心设计原则，确保功能与体验的平衡：</p>
+        <ul>
+          <li>
+            <strong>易用性</strong
+            >：导航层级清晰，关键入口一目了然，hover/active状态反馈明确
+          </li>
+          <li><strong>响应式</strong>：适配桌面端、平板、手机等不同尺寸设备</li>
+          <li>
+            <strong>性能</strong>：减少不必要的DOM操作和样式重绘，保证交互流畅
+          </li>
+          <li>
+            <strong>可维护性</strong
+            >：代码结构清晰，使用CSS变量统一管理样式，便于后续扩展
+          </li>
+        </ul>
+
+        <h2>二、基础结构实现（HTML）</h2>
+        <p>
+          导航栏的HTML结构需要兼顾语义化和扩展性，核心包含logo、导航菜单、移动端汉堡按钮三部分：
+        </p>
+        <pre><code>&lt;header class="navbar-header"&gt;
+    &lt;div class="navbar-container"&gt;
+        &lt;nav class="main-nav"&gt;
+            &lt;a href="index.html" class="logo"&gt;Code&lt;span&gt;Blog&lt;/span&gt;&lt;/a&gt;
+            &lt;div class="hamburger" id="hamburger"&gt;
+                &lt;i class="fas fa-bars"&gt;&lt;/i&gt;
+            &lt;/div&gt;
+            &lt;ul class="nav-menu" id="navMenu"&gt;
+                &lt;li class="nav-item"&gt;&lt;a href="index.html" class="nav-link active"&gt;首页&lt;/a&gt;&lt;/li&gt;
+                &lt;li class="nav-item"&gt;&lt;a href="博客.html" class="nav-link"&gt;博客&lt;/a&gt;&lt;/li&gt;
+                &lt;li class="nav-item"&gt;&lt;a href="作品集.html" class="nav-link"&gt;作品集&lt;/a&gt;&lt;/li&gt;
+                &lt;li class="nav-item"&gt;&lt;a href="关于我.html" class="nav-link"&gt;关于我&lt;/a&gt;&lt;/li&gt;
+                &lt;li class="nav-item"&gt;&lt;a href="文章示例.html" class="nav-link"&gt;文章示例&lt;/a&gt;&lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/nav&gt;
+    &lt;/div&gt;
+&lt;/header&gt;</code></pre>
+
+        <img
+          src="img/作品集-2.png"
+          alt="导航栏HTML结构示意图"
+          class="code-img"
+        />
+        <p class="img-caption">图2：导航栏HTML语义化结构拆解示意图</p>
+
+        <h2>三、样式美化（CSS）</h2>
+        <h3>1. 全局变量定义</h3>
+        <p>
+          使用CSS自定义属性（变量）统一管理主题色、阴影、过渡等样式，便于后续主题切换和维护：
+        </p>
+        <pre><code>:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #3498db;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --transition-base: all 0.3s ease;
+    --border-radius-sm: 8px;
+}</code></pre>
+
+        <h3>2. 基础布局与交互</h3>
+        <p>
+          导航栏核心样式需实现水平布局、粘性定位（sticky）、hover/active状态反馈：
+        </p>
+        <pre><code>.navbar-header {
+    background-color: #fff;
+    box-shadow: 0 2px 8px var(--shadow-color);
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+
+.nav-link {
+    position: relative;
+    padding: 8px 0;
+    color: #333;
+    transition: color 0.3s ease;
+}
+
+.nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--secondary-color);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+}</code></pre>
+
+        <h2>四、移动端响应式适配</h2>
+        <p>
+          移动端屏幕尺寸有限，需将横向菜单转为侧边栏，通过汉堡按钮控制显示/隐藏：
+        </p>
+
+        <!-- 移动端导航栏效果展示 -->
+        <img src="img/博客-3.webp" alt="导航栏效果" class="code-img" />
+        <p class="img-caption">图3：移动端导航栏侧边栏展开效果</p>
+
+        <h3>1. 样式适配</h3>
+        <pre><code>@media (max-width: 768px) {
+    .hamburger {
+        display: block; /* 显示汉堡按钮 */
+    }
+
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 250px;
+        height: 100vh;
+        background: #fff;
+        flex-direction: column;
+        padding: 80px 30px;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+    }
+
+    .nav-menu.active {
+        transform: translateX(0); /* 显示侧边菜单 */
+    }
+}</code></pre>
+
+        <h3>2. 交互逻辑（JavaScript）</h3>
+        <p>添加简单的JS代码，实现汉堡按钮的点击切换：</p>
+        <pre><code>// 获取元素
+const hamburger = document.getElementById('hamburger');
+const navMenu = document.getElementById('navMenu');
+
+// 点击切换菜单状态
+hamburger.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+    // 切换汉堡/关闭图标
+    const icon = hamburger.querySelector('i');
+    icon.classList.toggle('fa-bars');
+    icon.classList.toggle('fa-times');
+});
+
+// 点击菜单选项关闭侧边栏
+const navLinks = document.querySelectorAll('.nav-link');
+navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+        hamburger.querySelector('i').classList.replace('fa-times', 'fa-bars');
+    });
+});</code></pre>
+
+        <h2>五、优化与最佳实践</h2>
+        <p>为了提升导航栏的用户体验和性能，还可以做以下优化：</p>
+        <ul>
+          <li>
+            <strong>阴影过渡</strong>：导航栏hover时增加阴影深度，提升视觉层次感
+          </li>
+          <li>
+            <strong>图标优化</strong>：使用Font
+            Awesome图标库，保证图标清晰且体积小
+          </li>
+          <li>
+            <strong>无障碍访问</strong
+            >：添加aria属性，支持屏幕阅读器，提升可访问性
+          </li>
+          <li>
+            <strong>性能优化</strong
+            >：避免过度使用CSS动画，减少重排重绘；使用requestAnimationFrame处理动画
+          </li>
+          <li>
+            <strong>兼容性</strong>：针对老旧浏览器（如IE11）做样式降级处理
+          </li>
+        </ul>
+
+        <h2>总结</h2>
+        <p>
+          导航栏的开发看似简单，但要做到美观、易用、适配全端需要兼顾多方面细节。本文从结构、样式、交互、适配四个维度讲解了现代导航栏的开发流程，核心是遵循语义化、组件化、响应式的设计思想。希望通过本文的实战案例，能帮助你开发出更优质的前端导航组件。
+        </p>
+      </div>
+    </main>
+
+    <!-- 页脚区域 -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-top">
+          <a href="#" class="footer-logo">Code<span>Blog</span></a>
+          <p class="footer-desc">专注前端技术分享，与开发者共同成长</p>
+        </div>
+
+        <div class="footer-middle">
+          <div class="footer-nav-wrap">
+            <h4>快速导航</h4>
+            <ul class="footer-nav">
+              <li><a href="index.html">首页</a></li>
+              <li><a href="博客.html">博客</a></li>
+              <li><a href="作品集.html">作品集</a></li>
+              <li><a href="关于我.html">关于我</a></li>
+              <li><a href="文章示例.html">文章示例</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-contact-wrap">
+            <h4>联系我</h4>
+            <ul class="footer-contact">
+              <li><i class="fa-solid fa-envelope"></i> 18623603181@163.com</li>
+              <li><i class="fa-brands fa-github"></i> github.com/codeblog</li>
+              <li><i class="fa-solid fa-location-dot"></i> 重庆市 · 綦江区</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>&copy; 2026 CodeBlog 版权所有 | 向治谕</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // 移动端汉堡菜单交互
+      const hamburger = document.getElementById("hamburger");
+      const navMenu = document.getElementById("navMenu");
+
+      hamburger.addEventListener("click", () => {
+        navMenu.classList.toggle("active");
+        const icon = hamburger.querySelector("i");
+        icon.classList.toggle("fa-bars");
+        icon.classList.toggle("fa-times");
+      });
+
+      // 点击导航链接关闭菜单
+      const navLinks = document.querySelectorAll(".nav-link");
+      navLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          navMenu.classList.remove("active");
+          hamburger.querySelector("i").classList.replace("fa-times", "fa-bars");
+        });
+      });
+    </script>
+  </body>
+</html>

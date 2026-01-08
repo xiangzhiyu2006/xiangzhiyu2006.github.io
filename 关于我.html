@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>关于我 - CodeBlog</title>
+    <link rel="icon" href="img/图标.png" type="img/png" />
+     <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/关于我.css" />
+  </head>
+  <body>
+    <!-- 导航栏 -->
+    <header class="navbar-header">
+      <div class="navbar-container">
+        <nav class="main-nav">
+          <a href="index.html" class="logo">Code<span>Blog</span></a>
+          <div class="hamburger" id="hamburger">
+            <i class="fas fa-bars"></i>
+          </div>
+          <ul class="nav-menu" id="navMenu">
+            <li class="nav-item">
+              <a href="index.html" class="nav-link">首页</a>
+            </li>
+            <li class="nav-item">
+              <a href="博客.html" class="nav-link">博客</a>
+            </li>
+            <li class="nav-item">
+              <a href="作品集.html" class="nav-link">作品集</a>
+            </li>
+            <li class="nav-item">
+              <a href="关于我.html" class="nav-link active">关于我</a>
+            </li>
+            <li class="nav-item">
+              <a href="文章示例.html" class="nav-link">文章示例</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- 顶部渐变横幅 - 效果图核心样式 -->
+    <section class="about-banner">
+      <div class="container">
+        <h1 class="banner-title">关于我</h1>
+        <p class="banner-subtitle">
+          一个热爱技术、追求成长的前端爱好者，在这里分享我的学习旅程与技术思考
+        </p>
+      </div>
+    </section>
+
+    <!-- 关于我核心内容 -->
+    <section class="about-me">
+      <div class="container">
+        <div class="about-me__content">
+          <!-- 头像 -->
+          <div class="about-me__avatar">
+            <img src="img/头像.webp" alt="个人头像" />
+          </div>
+          <!-- 自我介绍+信息 -->
+          <div class="about-me__intro">
+            <h2 class="intro-name">你好，我是向治谕</h2>
+            <p class="intro-text">
+              大家好！我是一名重庆安防职业学院人工智能技术应用专业的大一新生，现居重庆綦江。从小我就对计算机充满好奇，高中时期开始自学HTML和CSS，从此踏入了前端开发的大门。
+            </p>
+            <p class="intro-text">
+              进入大学后，我系统地学习了HTML,CSS,UI等专业课程，同时利用课余时间深入学习前端技术，目前已经掌握了HTML5、CSS3、JavaScript的基础语法，正在学习Vue.js框架。
+            </p>
+            <p class="intro-text">
+              我建立这个博客的初衷，是为了记录自己的学习历程，把遇到的问题和解决方法分享出来，既可以加深自己的理解，也希望能帮助到和我一样的初学者。未来，我希望能不断提升自己的技术水平，参与更多的实战项目，成为一名优秀的前端开发工程师。
+            </p>
+            <p class="intro-text">
+              除了编程，我还喜欢阅读技术书籍、看纪录片、打篮球。这些爱好让我的大学生活更加充实，也让我能以更积极的心态面对学习中的挑战。
+            </p>
+
+            <!-- 个人信息栏 -->
+            <div class="intro-info">
+              <div class="info-item">
+                <i class="fas fa-user"></i>
+                <span class="info-label">身份：</span>
+                <span class="info-value">大一学生 / 前端爱好者</span>
+              </div>
+              <div class="info-item">
+                <i class="fas fa-graduation-cap"></i>
+                <span class="info-label">学校：</span>
+                <span class="info-value"
+                  >重庆安防职业学院 / 人工智能技术应用</span
+                >
+              </div>
+              <div class="info-item">
+                <i class="fas fa-location-dot"></i>
+                <span class="info-label">坐标：</span>
+                <span class="info-value">重庆市 · 綦江区</span>
+              </div>
+              <div class="info-item">
+                <i class="fab fa-github"></i>
+                <span class="info-label">Github：</span>
+                <span class="info-value">github.com/codeblog</span>
+              </div>
+              <div class="info-item">
+                <i class="fas fa-phone"></i>
+                <span class="info-label">电话：</span>
+                <span class="info-value">18623603181</span>
+              </div>
+              <div class="info-item">
+                <i class="fab fa-weixin"></i>
+                <span class="info-label">微信：</span>
+                <span class="info-value">XZY18623603181</span>
+              </div>
+              <div class="info-item">
+                <i class="fas fa-envelope"></i>
+                <span class="info-label">邮箱：</span>
+                <span class="info-value">18623603181@163.com</span>
+              </div>
+            </div>
+
+            <!-- 社交图标 -->
+            <div class="intro-social">
+              <a
+                href="https://github.com/codeblog"
+                class="social-icon"
+                target="_blank"
+                ><i class="fab fa-github"></i
+              ></a>
+              <a href="javascript:;" class="social-icon"
+                ><i class="fab fa-weixin"></i
+              ></a>
+              <a href="mailto:18623603181@163.com" class="social-icon"
+                ><i class="fas fa-envelope"></i
+              ></a>
+              <a href="javascript:;" class="social-icon"
+                ><i class="fas fa-phone"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 个人经历模块 -->
+        <div class="about-me__experience">
+          <div class="content__section experience">
+            <h3 class="section__title">个人经历</h3>
+            <div class="experience__timeline">
+              <div class="timeline__item">
+                <div class="timeline__period">2025.09 - 至今</div>
+                <div class="timeline__title">
+                  重庆安防职业学院 - 人工智能技术应用专业 大一
+                </div>
+                <div class="timeline__desc">
+                  主修网页制作、平面设计、高等数学、大学英语等课程。<br />
+                  加入学校的智创空间，积极参与社团组织的技术分享会和编程打卡活动；<br />
+                  学习HTML5、CSS3、JavaScript，完成个人博客的搭建，并开始撰写技术学习笔记；<br />
+                  参与校内小型前端项目实践，负责页面的布局和简单交互效果的实现。
+                </div>
+              </div>
+              <div class="timeline__item">
+                <div class="timeline__period">2022.09 - 2025.06</div>
+                <div class="timeline__title">重庆市忠县乌杨中学 - 普通高中</div>
+                <div class="timeline__desc">
+                  文理分科后选择文科，主攻历史，地理，政治；<br />
+                  大一开始接触前端开发，自学HTML和CSS，制作了第一个个人静态网页；<br />
+                  利用寒暑假时间，通过在线课程学习JavaScript基础；<br />
+                  参加学校组织的竞赛。
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 页脚区域 -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-top">
+          <a href="#" class="footer-logo">Code<span>Blog</span></a>
+          <p class="footer-desc">专注前端技术分享，与开发者共同成长</p>
+        </div>
+        <div class="footer-middle">
+          <div class="footer-nav-wrap">
+            <h4>快速导航</h4>
+            <ul class="footer-nav">
+              <li><a href="index.html">首页</a></li>
+              <li><a href="博客.html">博客</a></li>
+              <li><a href="作品集.html">作品集</a></li>
+              <li><a href="关于我.html">关于我</a></li>
+              <li><a href="文章示例.html">文章示例</a></li>
+            </ul>
+          </div>
+          <div class="footer-contact-wrap">
+            <h4>联系我</h4>
+            <ul class="footer-contact">
+              <li><i class="fa-solid fa-envelope"></i> 18623603181@163.com</li>
+              <li><i class="fa-brands fa-github"></i> github.com/codeblog</li>
+              <li><i class="fa-solid fa-location-dot"></i> 重庆市 · 綦江区</li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2026 CodeBlog 版权所有 | 向治谕</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- 移动端汉堡菜单交互JS -->
+    <script>
+      const hamburger = document.getElementById("hamburger");
+      const navMenu = document.getElementById("navMenu");
+
+      // 点击汉堡按钮切换菜单
+      hamburger.addEventListener("click", () => {
+        navMenu.classList.toggle("active");
+        const icon = hamburger.querySelector("i");
+        icon.classList.toggle("fa-bars");
+        icon.classList.toggle("fa-times");
+      });
+
+      // 点击导航项关闭菜单
+      const navLinks = document.querySelectorAll(".nav-link");
+      navLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          navMenu.classList.remove("active");
+          const icon = hamburger.querySelector("i");
+          icon.classList.add("fa-bars");
+          icon.classList.remove("fa-times");
+        });
+      });
+
+      // 点击空白区域关闭菜单
+      document.addEventListener("click", (e) => {
+        if (
+          !hamburger.contains(e.target) &&
+          !navMenu.contains(e.target) &&
+          navMenu.classList.contains("active")
+        ) {
+          navMenu.classList.remove("active");
+          const icon = hamburger.querySelector("i");
+          icon.classList.add("fa-bars");
+          icon.classList.remove("fa-times");
+        }
+      });
+    </script>
+  </body>
+</html>

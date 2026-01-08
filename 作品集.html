@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeBlog - 专注HTML/CSS技术的个人博客</title>
+    <link rel="icon" href="img/图标.png" type="img/png" />
+     <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/作品集.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="navbar-header">
+      <div class="navbar-container">
+        <nav class="main-nav">
+          <a href="index.html" class="logo">Code<span>Blog</span></a>
+          <!-- 移动端汉堡菜单 -->
+          <div class="hamburger" id="hamburger">
+            <i class="fas fa-bars"></i>
+          </div>
+          <ul class="nav-menu" id="navMenu">
+            <li class="nav-item">
+              <a href="index.html" class="nav-link">首页</a>
+            </li>
+            <li class="nav-item"><a href="博客.html" class="nav-link">博客</a></li>
+            <li class="nav-item"><a href="作品集.html" class="nav-link active">作品集</a></li>
+            <li class="nav-item"><a href="关于我.html" class="nav-link">关于我</a></li>
+            <li class="nav-item"><a href="文章示例.html" class="nav-link">文章示例</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header> 
+
+    <!-- 作品集核心内容区 -->
+    <main class="portfolio-main">
+      <!-- 页面标题区 -->
+      <section class="portfolio-hero">
+        <div class="container">
+          <h1 class="hero-title">我的前端作品集</h1>
+          <p class="hero-desc">沉淀HTML/CSS实战经验，用代码打造有温度的界面<br>每一个作品，都是我对前端设计的思考与实践</p>
+        </div>
+      </section>
+
+      <!-- 作品筛选栏 -->
+      <section class="portfolio-filter">
+        <div class="container">
+          <ul class="filter-list" id="filterList">
+            <li class="filter-item active" data-filter="all">全部作品</li>
+            <li class="filter-item" data-filter="html">HTML实战</li>
+            <li class="filter-item" data-filter="css">CSS特效</li>
+            <li class="filter-item" data-filter="responsive">响应式设计</li>
+            <li class="filter-item" data-filter="layout">布局练习</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 作品展示网格 -->
+      <section class="portfolio-grid">
+        <div class="container">
+          <div class="grid-wrapper">
+            <!-- 作品卡片1 -->
+            <div class="portfolio-card" data-category="html responsive">
+              <div class="card-img">
+                <img src="img/作品集-1.png" alt="响应式博客首页">
+                <div class="card-overlay">
+                  <a href="#" class="view-btn">查看详情</a>
+                </div>
+              </div>
+              <div class="card-content">
+                <h3 class="card-title">响应式博客首页</h3>
+                <p class="card-category">HTML / 响应式设计</p>
+                <p class="card-desc">基于Flex布局实现的自适应博客首页，适配移动端/平板/桌面端</p>
+              </div>
+            </div>
+
+            <!-- 作品卡片2 -->
+            <div class="portfolio-card" data-category="css layout">
+              <div class="card-img">
+                <img src="img/博客-2.webp" alt="CSS网格布局展示">
+                <div class="card-overlay">
+                  <a href="#" class="view-btn">查看详情</a>
+                </div>
+              </div>
+              <div class="card-content">
+                <h3 class="card-title">CSS网格布局展示</h3>
+                <p class="card-category">CSS / 布局练习</p>
+                <p class="card-desc">使用CSS Grid实现的多列自适应布局，包含卡片hover交互效果</p>
+              </div>
+            </div>
+
+            <!-- 作品卡片3 -->
+            <div class="portfolio-card" data-category="css responsive">
+              <div class="card-img">
+                <img src="img/博客-3.webp" alt="CSS动效按钮集">
+                <div class="card-overlay">
+                  <a href="#" class="view-btn">查看详情</a>
+                </div>
+              </div>
+              <div class="card-content">
+                <h3 class="card-title">CSS动效按钮集</h3>
+                <p class="card-category">CSS / 响应式设计</p>
+                <p class="card-desc">10种不同风格的CSS动画按钮，包含hover、点击、加载等交互效果</p>
+              </div>
+            </div>
+
+            <!-- 作品卡片4 -->
+            <div class="portfolio-card" data-category="html css">
+              <div class="card-img">
+                <img src="img/作品集-2.png" alt="安防学院官网">
+                <div class="card-overlay">
+                  <a href="#" class="view-btn">查看详情</a>
+                </div>
+              </div>
+              <div class="card-content">
+                <h3 class="card-title">竞赛项目|安防学院官网</h3>
+                <p class="card-category">HTML / CSS / js</p>
+                <p class="card-desc">学院官网，包含首页、学校简介、校园生活等模块</p>
+              </div>
+            </div>
+
+            <!-- 作品卡片5 -->
+            <div class="portfolio-card" data-category="layout responsive">
+              <div class="card-img">
+                <img src="img/作品集-3.png" alt="多栏博客文章页">
+                <div class="card-overlay">
+                  <a href="#" class="view-btn">查看详情</a>
+                </div>
+              </div>
+              <div class="card-content">
+                <h3 class="card-title">多栏博客文章页</h3>
+                <p class="card-category">布局练习 / 响应式设计</p>
+                <p class="card-desc">上侧导航+中间内容的经典博客布局，移动端自动折叠为单列</p>
+              </div>
+            </div>
+
+            <!-- 作品卡片6 -->
+            <div class="portfolio-card" data-category="css">
+              <div class="card-img">
+                <img src="img/作品集-4.png" alt="CSS渐变背景集">
+                <div class="card-overlay">
+                  <a href="#" class="view-btn">查看详情</a>
+                </div>
+              </div>
+              <div class="card-content">
+                <h3 class="card-title">CSS渐变背景集</h3>
+                <p class="card-category">CSS特效</p>
+                <p class="card-desc">20种不同风格的CSS渐变背景，包含线性渐变、径向渐变、锥形渐变</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 评论区模块 -->
+      <section class="portfolio-comments">
+        <div class="container">
+          <h2 class="comments-title">作品评论</h2>
+          <p class="comments-desc">分享你的看法，交流前端学习经验</p>
+          
+          <!-- 评论列表 -->
+          <div class="comments-list">
+            <!-- 评论项1 -->
+            <div class="comment-item">
+              <div class="comment-avatar">
+                <img src="img/博客-1.webp" alt="用户头像">
+              </div>
+              <div class="comment-content">
+                <div class="comment-meta">
+                  <h4 class="comment-author">前端学习者</h4>
+                  <span class="comment-time">2026-01-05 15:30</span>
+                </div>
+                <p class="comment-text">这些CSS渐变效果太惊艳了，尤其是按钮集的交互，已经收藏学习了，期待更多实战作品！</p>
+              </div>
+            </div>
+            
+            <!-- 评论项2 -->
+            <div class="comment-item">
+              <div class="comment-avatar">
+                <img src="img/图片-2.webp" alt="用户头像">
+              </div>
+              <div class="comment-content">
+                <div class="comment-meta">
+                  <h4 class="comment-author">Web开发爱好者</h4>
+                  <span class="comment-time">2026-01-03 09:18</span>
+                </div>
+                <p class="comment-text">安防学院官网的布局很规整，想问一下这个项目有没有用到前端框架？还是纯原生HTML/CSS实现的？</p>
+              </div>
+            </div>
+            
+            <!-- 评论项3 -->
+            <div class="comment-item">
+              <div class="comment-avatar">
+                <img src="img/头像.webp" alt="用户头像">
+              </div>
+              <div class="comment-content">
+                <div class="comment-meta">
+                  <h4 class="comment-author">设计与代码</h4>
+                  <span class="comment-time">2025-12-28 22:45</span>
+                </div>
+                <p class="comment-text">响应式布局做得很到位，移动端的适配效果流畅，网格布局的使用也很规范，值得借鉴。</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 评论提交表单 -->
+          <div class="comment-form-wrap">
+            <h3 class="form-title">提交你的评论</h3>
+            <form class="comment-form" id="commentForm">
+              <div class="form-group">
+                <label for="commentAuthor">你的昵称</label>
+                <input type="text" id="commentAuthor" class="form-input" placeholder="请输入你的昵称" required>
+              </div>
+              <div class="form-group">
+                <label for="commentContent">评论内容</label>
+                <textarea id="commentContent" class="form-textarea" rows="5" placeholder="分享你的想法、疑问或建议..." required></textarea>
+              </div>
+              <button type="submit" class="form-submit-btn">提交评论</button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-top">
+          <a href="#" class="footer-logo">Code<span>Blog</span></a>
+          <p class="footer-desc">
+            专注HTML/CSS技术分享，纯静态前端实现精美界面
+          </p>
+        </div>
+
+        <div class="footer-middle">
+          <div class="footer-nav-wrap">
+            <h4>快速导航</h4>
+            <ul class="footer-nav">
+              <li><a href="index.html">首页</a></li>
+              <li><a href="博客.html">博客</a></li>
+              <li><a href="作品集.html">作品集</a></li>
+              <li><a href="关于我.html">关于我</a></li>
+              <li><a href="文章示例.html">文章示例</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-contact-wrap">
+            <h4>联系我</h4>
+            <ul class="footer-contact">
+              <li><i class="fa-solid fa-envelope"></i> 18623603181@163.com</li>
+              <li><i class="fa-solid fa-phone"></i> 18623603181</li>
+              <li><i class="fa-solid fa-location-dot"></i> 重庆市 · 綦江区</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>&copy; 2026 CodeBlog 版权所有 | 向治谕</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- 引入JS实现筛选和移动端菜单功能 -->
+    <script>
+      // 移动端汉堡菜单交互
+      const hamburger = document.getElementById('hamburger');
+      const navMenu = document.getElementById('navMenu');
+      const navLinks = document.querySelectorAll('.nav-link'); // 新增：获取所有导航链接
+      
+      hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        navMenu.classList.toggle('active');
+      });
+
+      // 新增：点击导航链接关闭汉堡菜单
+      navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          hamburger.classList.remove('active');
+          navMenu.classList.remove('active');
+        });
+      });
+
+      // 作品筛选功能
+      const filterItems = document.querySelectorAll('.filter-item');
+      const portfolioCards = document.querySelectorAll('.portfolio-card');
+      
+      // 新增：初始化显示全部作品
+      function initPortfolio() {
+        portfolioCards.forEach(card => {
+          card.style.display = 'block';
+          setTimeout(() => {
+            card.classList.add('show');
+          }, 100); // 延迟显示，增加渐入效果
+        });
+      }
+
+      // 页面加载完成后初始化
+      window.addEventListener('DOMContentLoaded', initPortfolio);
+      
+      filterItems.forEach(item => {
+        item.addEventListener('click', () => {
+          // 移除所有筛选按钮的active状态
+          filterItems.forEach(btn => btn.classList.remove('active'));
+          // 给当前点击的按钮添加active状态
+          item.classList.add('active');
+          
+          const filterValue = item.getAttribute('data-filter');
+          
+          // 筛选作品卡片
+          portfolioCards.forEach(card => {
+            const cardCategory = card.getAttribute('data-category');
+            if (filterValue === 'all' || cardCategory.includes(filterValue)) {
+              card.style.display = 'block';
+              // 添加渐入动画
+              setTimeout(() => {
+                card.classList.add('show');
+              }, 10);
+            } else {
+              card.classList.remove('show');
+              // 添加渐出动画后隐藏
+              setTimeout(() => {
+                card.style.display = 'none';
+              }, 300);
+            }
+          });
+        });
+      });
+
+      // 评论表单提交交互
+      const commentForm = document.getElementById('commentForm');
+      const commentAuthor = document.getElementById('commentAuthor');
+      const commentContent = document.getElementById('commentContent');
+      const commentsList = document.querySelector('.comments-list');
+
+      commentForm.addEventListener('submit', function(e) {
+        // 阻止表单默认提交行为
+        e.preventDefault();
+        
+        // 获取表单值并去除首尾空格
+        const authorName = commentAuthor.value.trim();
+        const commentText = commentContent.value.trim();
+        
+        // 验证表单内容
+        if (!authorName || !commentText) {
+          alert('昵称和评论内容不能为空哦！');
+          return;
+        }
+        
+        // 获取当前时间
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const currentTime = `${year}-${month}-${day} ${hours}:${minutes}`;
+        
+        // 创建新评论元素
+        const newComment = document.createElement('div');
+        newComment.className = 'comment-item';
+        newComment.innerHTML = `
+          <div class="comment-avatar">
+            <img src="https://via.placeholder.com/60" alt="${authorName}头像">
+          </div>
+          <div class="comment-content">
+            <div class="comment-meta">
+              <h4 class="comment-author">${authorName}</h4>
+              <span class="comment-time">${currentTime}</span>
+            </div>
+            <p class="comment-text">${commentText}</p>
+          </div>
+        `;
+        
+        // 添加渐入动画效果
+        newComment.style.opacity = '0';
+        newComment.style.transform = 'translateY(20px)';
+        newComment.style.transition = 'all 0.3s ease';
+        
+        // 将新评论插入到列表顶部
+        commentsList.prepend(newComment);
+        
+        // 触发渐入动画
+        setTimeout(() => {
+          newComment.style.opacity = '1';
+          newComment.style.transform = 'translateY(0)';
+        }, 100);
+        
+        // 重置表单
+        commentForm.reset();
+        
+        // 提示提交成功
+        alert('评论提交成功！');
+      });
+    </script>
+</body>
+</html>

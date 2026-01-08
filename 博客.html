@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CodeBlog - 专注HTML/CSS技术的个人博客</title>
+    <link rel="icon" href="img/图标.png" type="img/png" />
+     <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/博客.css" />
+  </head>
+  <body>
+    <!-- 导航栏 -->
+    <header class="navbar-header">
+      <div class="navbar-container">
+        <nav class="main-nav">
+          <a href="index.html" class="logo">Code<span>Blog</span></a>
+          <!-- 移动端汉堡菜单 -->
+          <div class="hamburger" id="hamburger">
+            <i class="fas fa-bars"></i>
+          </div>
+          <ul class="nav-menu" id="navMenu">
+            <li class="nav-item">
+              <a href="index.html" class="nav-link">首页</a>
+            </li>
+            <li class="nav-item">
+              <a href="博客.html" class="nav-link active">博客</a>
+            </li>
+            <li class="nav-item">
+              <a href="作品集.html" class="nav-link">作品集</a>
+            </li>
+            <li class="nav-item">
+              <a href="关于我.html" class="nav-link">关于我</a>
+            </li>
+            <li class="nav-item">
+              <a href="文章示例.html" class="nav-link">文章示例</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- 英雄区 -->
+    <section class="hero-section">
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-avatar">
+            <img src="img/头像.webp" alt="前端君的头像" />
+          </div>
+          <h1 class="hero-title">Hi，我是向治谕 👋</h1>
+          <p class="hero-subtitle">
+            一名专注于HTML/CSS的前端开发者，热爱手写静态页面，
+            分享最实用的前端实战技巧和个人成长心得
+          </p>
+          <div class="hero-stats">
+            <div class="stat-item">
+              <span class="stat-number">1</span>
+              <span class="stat-label">原创文章</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">半年+</span>
+              <span class="stat-label">前端经验</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">43+</span>
+              <span class="stat-label">学习伙伴</span>
+            </div>
+          </div>
+          <a href="#" class="hero-btn">
+            <i class="fas fa-handshake"></i> 认识我 & 一起学习
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 博客内容区 -->
+    <section class="blog-section">
+      <div class="container">
+        <h2 class="section-title">最新文章</h2>
+
+        <!-- 分类筛选栏（纯HTML + CSS） -->
+        <div class="category-filter">
+          <button class="category-btn active" data-category="all">全部</button>
+          <button class="category-btn" data-category="HTML">HTML</button>
+          <button class="category-btn" data-category="CSS">CSS</button>
+          <button class="category-btn" data-category="UI">UI</button>
+        </div>
+
+        <!-- 博客列表容器 -->
+        <div class="blog-grid" id="blogList">
+          <!-- 文章卡片1 - HTML分类 -->
+          <div class="blog-card" data-category="HTML">
+            <img
+              src="img/博客-1.webp"
+              alt="HTML5 语义化标签实战指南"
+              class="blog-card-img"
+            />
+            <div class="blog-card-content">
+              <span class="blog-card-category"
+                ><i class="fas fa-tag"></i> HTML</span
+              >
+              <h3 class="blog-card-title">HTML5 语义化标签实战指南</h3>
+              <p class="blog-card-desc">
+                纯HTML实现语义化页面结构，使用header、nav、article、section等标签重构页面，无需JS即可提升SEO和可访问性。
+              </p>
+              <div class="blog-card-meta">
+                <div class="blog-card-author">
+                  <i class="fas fa-user"></i> 向治谕
+                </div>
+                <div class="blog-card-date">
+                  <i class="fas fa-calendar"></i> 2026-01-05
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 文章卡片2 - CSS分类 -->
+          <div class="blog-card" data-category="CSS">
+            <img
+              src="img/图片-3.webp"
+              alt="CSS Grid 网格布局完全掌握"
+              class="blog-card-img"
+            />
+            <div class="blog-card-content">
+              <span class="blog-card-category"
+                ><i class="fas fa-tag"></i> CSS</span
+              >
+              <h3 class="blog-card-title">CSS Grid 网格布局完全掌握</h3>
+              <p class="blog-card-desc">
+                纯CSS
+                Grid实现复杂页面布局，通过grid-template-columns/rows、grid-area等属性，无需浮动/定位即可完成响应式布局。
+              </p>
+              <div class="blog-card-meta">
+                <div class="blog-card-author">
+                  <i class="fas fa-user"></i> 向治谕
+                </div>
+                <div class="blog-card-date">
+                  <i class="fas fa-calendar"></i> 2026-01-02
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 文章卡片3 - UI分类 -->
+          <div class="blog-card" data-category="UI">
+            <img
+              src="img/博客-3.webp"
+              alt="UI设计中的视觉层次构建"
+              class="blog-card-img"
+            />
+            <div class="blog-card-content">
+              <span class="blog-card-category"
+                ><i class="fas fa-tag"></i> UI</span
+              >
+              <h3 class="blog-card-title">UI设计中的视觉层次构建</h3>
+              <p class="blog-card-desc">
+                HTML结构分层+CSS样式（字体/颜色/间距/阴影）实现视觉层次，纯静态技术让页面重点突出、可读性提升。
+              </p>
+              <div class="blog-card-meta">
+                <div class="blog-card-author">
+                  <i class="fas fa-user"></i> 向治谕
+                </div>
+                <div class="blog-card-date">
+                  <i class="fas fa-calendar"></i> 2025-12-30
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 文章卡片4 - HTML分类 -->
+          <div class="blog-card" data-category="HTML">
+            <img
+              src="img/博客-2.webp"
+              alt="HTML5 Canvas 绘制精美图表"
+              class="blog-card-img"
+            />
+            <div class="blog-card-content">
+              <span class="blog-card-category"
+                ><i class="fas fa-tag"></i> HTML</span
+              >
+              <h3 class="blog-card-title">HTML5 Canvas 绘制精美图表</h3>
+              <p class="blog-card-desc">
+                仅使用HTML5 Canvas标签和原生Canvas
+                API绘制柱状图、折线图，纯前端静态实现数据可视化效果。
+              </p>
+              <div class="blog-card-meta">
+                <div class="blog-card-author">
+                  <i class="fas fa-user"></i> 向治谕
+                </div>
+                <div class="blog-card-date">
+                  <i class="fas fa-calendar"></i> 2026-01-04
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 文章卡片5 - CSS分类 -->
+          <div class="blog-card" data-category="CSS">
+            <img
+              src="img/图片-4.webp"
+              alt="CSS 渐变与纹理背景设计"
+              class="blog-card-img"
+            />
+            <div class="blog-card-content">
+              <span class="blog-card-category"
+                ><i class="fas fa-tag"></i> CSS</span
+              >
+              <h3 class="blog-card-title">CSS 渐变与纹理背景设计</h3>
+              <p class="blog-card-desc">
+                纯CSS实现线性/径向/圆锥渐变背景，结合background-repeat和CSS图案生成器，打造精美纹理背景效果。
+              </p>
+              <div class="blog-card-meta">
+                <div class="blog-card-author">
+                  <i class="fas fa-user"></i> 向治谕
+                </div>
+                <div class="blog-card-date">
+                  <i class="fas fa-calendar"></i> 2026-01-01
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 文章卡片6 - UI分类 -->
+          <div class="blog-card" data-category="UI">
+            <img
+              src="img/博客-4.webp"
+              alt="现代UI按钮设计与交互效果"
+              class="blog-card-img"
+            />
+            <div class="blog-card-content">
+              <span class="blog-card-category"
+                ><i class="fas fa-tag"></i> UI</span
+              >
+              <h3 class="blog-card-title">现代UI按钮设计与交互效果</h3>
+              <p class="blog-card-desc">
+                HTML按钮标签+CSS伪类（hover/active/disabled）实现全状态按钮，结合transition实现流畅交互，无JS依赖。
+              </p>
+              <div class="blog-card-meta">
+                <div class="blog-card-author">
+                  <i class="fas fa-user"></i> 向治谕
+                </div>
+                <div class="blog-card-date">
+                  <i class="fas fa-calendar"></i> 2025-12-29
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 分页控件 -->
+        <div class="pagination" id="pagination">
+          <button class="page-btn" id="prevBtn" disabled>
+            <i class="fas fa-chevron-left"></i> 上一页
+          </button>
+          <span class="page-number active" data-page="1">1</span>
+          <span class="page-number" data-page="2">2</span>
+          <button class="page-btn" id="nextBtn">
+            下一页 <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-top">
+          <a href="#" class="footer-logo">Code<span>Blog</span></a>
+          <p class="footer-desc">
+            专注HTML/CSS技术分享，纯静态前端实现精美界面
+          </p>
+        </div>
+
+        <div class="footer-middle">
+          <div class="footer-nav-wrap">
+            <h4>快速导航</h4>
+            <ul class="footer-nav">
+              <li><a href="index.html">首页</a></li>
+              <li><a href="博客.html">博客</a></li>
+              <li><a href="作品集.html">作品集</a></li>
+              <li><a href="关于我.html">关于我</a></li>
+              <li><a href="文章示例.html">文章示例</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-contact-wrap">
+            <h4>联系我</h4>
+            <ul class="footer-contact">
+              <li><i class="fa-solid fa-envelope"></i> 18623603181@163.com</li>
+              <li><i class="fa-brands fa-github"></i> github.com/codeblog</li>
+              <li><i class="fa-solid fa-location-dot"></i> 重庆市 · 綦江区</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>&copy; 2026 CodeBlog 版权所有 | 向治谕</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- 交互JS -->
+    <script>
+      // 移动端导航交互
+      const hamburger = document.getElementById("hamburger");
+      const navMenu = document.getElementById("navMenu");
+      hamburger.addEventListener("click", () => {
+        navMenu.classList.toggle("active");
+        // 优化图标切换：直接操作i标签，而非重写innerHTML
+        const icon = hamburger.querySelector("i");
+        if (navMenu.classList.contains("active")) {
+          icon.classList.remove("fa-bars");
+          icon.classList.add("fa-times");
+        } else {
+          icon.classList.remove("fa-times");
+          icon.classList.add("fa-bars");
+        }
+      });
+
+      // 导航链接点击关闭菜单
+      const navLinks = document.querySelectorAll(".nav-link");
+      navLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          navMenu.classList.remove("active");
+          const icon = hamburger.querySelector("i");
+          icon.classList.remove("fa-times");
+          icon.classList.add("fa-bars");
+        });
+      });
+
+      // 分类筛选交互（基于HTML data属性）
+      const categoryBtns = document.querySelectorAll(".category-btn");
+      const blogCards = document.querySelectorAll(".blog-card");
+      categoryBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          // 切换按钮选中状态
+          categoryBtns.forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          const targetCategory = btn.dataset.category;
+
+          // 筛选文章卡片
+          blogCards.forEach((card) => {
+            if (
+              targetCategory === "all" ||
+              card.dataset.category === targetCategory
+            ) {
+              card.style.display = "block";
+            } else {
+              card.style.display = "none";
+            }
+          });
+        });
+      });
+
+      // 分页交互（简化版，仅演示）
+      const pageNumbers = document.querySelectorAll(".page-number");
+      const prevBtn = document.getElementById("prevBtn");
+      const nextBtn = document.getElementById("nextBtn");
+      let currentPage = 1;
+      const totalPages = 2;
+
+      // 页码点击事件
+      pageNumbers.forEach((number) => {
+        number.addEventListener("click", () => {
+          pageNumbers.forEach((n) => n.classList.remove("active"));
+          number.classList.add("active");
+          currentPage = parseInt(number.dataset.page);
+          updatePaginationBtnStatus();
+        });
+      });
+
+      // 上一页/下一页事件
+      prevBtn.addEventListener("click", () => {
+        if (currentPage > 1) {
+          currentPage--;
+          updatePageNumberActive();
+          updatePaginationBtnStatus();
+        }
+      });
+
+      nextBtn.addEventListener("click", () => {
+        if (currentPage < totalPages) {
+          currentPage++;
+          updatePageNumberActive();
+          updatePaginationBtnStatus();
+        }
+      });
+
+      // 更新页码选中状态
+      function updatePageNumberActive() {
+        pageNumbers.forEach((n) => {
+          if (parseInt(n.dataset.page) === currentPage) {
+            n.classList.add("active");
+          } else {
+            n.classList.remove("active");
+          }
+        });
+      }
+
+      // 更新分页按钮禁用状态
+      function updatePaginationBtnStatus() {
+        prevBtn.disabled = currentPage === 1;
+        nextBtn.disabled = currentPage === totalPages;
+      }
+    </script>
+  </body>
+</html>
