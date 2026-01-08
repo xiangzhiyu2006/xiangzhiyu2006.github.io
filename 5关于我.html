@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>胡洋铭 - 个人简历</title>
+    <!-- 引入Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入Font Awesome图标 -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- 重置默认样式，避免不同浏览器差异 -->
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Microsoft Yahei", sans-serif;
+      }
+
+      /* 关键修改：添加与导航栏高度匹配的顶部内边距 */
+      body {
+        padding-top: 80px; /* 适配导航栏高度，避免内容被遮挡 */
+        background-color: #f8f9fa;
+      }
+
+      .navbar {
+        width: 100%;
+        background-color: #fff;
+        padding: 15px 20px;
+        padding-left: 50px;
+        padding-right: 60px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 999;
+        height: 80px; /* 固定导航栏高度，方便计算body的padding-top */
+        box-sizing: border-box; /* 确保padding不会增加总高度 */
+      }
+
+      .logo {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #000;
+        text-decoration: none;
+      }
+
+      .logo span {
+        color: #6c63ff;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 50px;
+        list-style: none;
+      }
+
+      .nav-links li a {
+        text-decoration: none;
+        color: #333;
+        font-size: 1rem;
+        position: relative;
+        transition: color 0.3s ease 0.1s;
+      }
+
+      .nav-links li a::after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: #007bff;
+        transition: width 0.3s ease 0.1s;
+      }
+
+      .nav-links li a:hover {
+        color: #007bff;
+      }
+
+      .nav-links li a:hover::after {
+        width: 100%;
+      }
+
+      .hamburger {
+        display: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: #333;
+        /* 避免点击时选中文字 */
+        user-select: none;
+      }
+
+      @media (max-width: 768px) {
+        .nav-links {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          width: 100%;
+          background-color: #fff;
+          flex-direction: column;
+          padding: 20px 30px;
+          gap: 15px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+          display: none;
+        }
+
+        .nav-links.active {
+          display: flex;
+        }
+
+        .hamburger {
+          display: block;
+        }
+
+        .navbar {
+          padding-left: 20px;
+          padding-right: 20px;
+          height: 70px; /* 移动端导航栏高度稍小 */
+        }
+
+        /* 移动端适配body的padding-top */
+        body {
+          padding-top: 70px;
+        }
+      }
+    </style>
+
+    <!-- 页脚样式 -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
+      }
+
+      /* 页脚样式 */
+      footer {
+        background-color: #2c3e50;
+        color: #ecf0f1;
+        padding: 40px 0 20px;
+        border-radius: 10px 10px 0 0;
+        box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .footer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+      }
+
+      .footer-section h3 {
+        color: #3498db;
+        font-size: 1.3rem;
+        margin-bottom: 20px;
+        position: relative;
+        padding-bottom: 8px;
+      }
+
+      .footer-section h3::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 40px;
+        height: 3px;
+        background-color: #e74c3c;
+      }
+
+      /* 快速链接样式 */
+      .footer-links {
+        list-style: none;
+      }
+
+      .footer-links li {
+        margin-bottom: 10px;
+      }
+
+      .footer-links a {
+        color: #bdc3c7;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+      }
+
+      .footer-links a:hover {
+        color: #3498db;
+        transform: translateX(5px);
+      }
+
+      .footer-links i {
+        margin-right: 8px;
+        width: 20px;
+        text-align: center;
+      }
+
+      /* 订阅区域样式 */
+      .subscribe-form {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .subscribe-form p {
+        color: #bdc3c7;
+        margin-bottom: 15px;
+        font-size: 0.95rem;
+      }
+
+      .email-input {
+        padding: 12px 15px;
+        border: none;
+        border-radius: 5px;
+        margin-bottom: 12px;
+        font-size: 1rem;
+        background-color: #34495e;
+        color: #ecf0f1;
+      }
+
+      .email-input::placeholder {
+        color: #95a5a6;
+      }
+
+      .subscribe-btn {
+        background-color: #e74c3c;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 5px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        font-weight: 600;
+      }
+
+      .subscribe-btn:hover {
+        background-color: #c0392b;
+      }
+
+      /* 搜索框样式 */
+      .search-box {
+        display: flex;
+        margin-top: 10px;
+      }
+
+      .search-input {
+        flex-grow: 1;
+        padding: 12px 15px;
+        border: none;
+        border-radius: 5px 0 0 5px;
+        background-color: #34495e;
+        color: #ecf0f1;
+        font-size: 1rem;
+      }
+
+      .search-btn {
+        background-color: #3498db;
+        color: white;
+        border: none;
+        padding: 0 20px;
+        border-radius: 0 5px 5px 0;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .search-btn:hover {
+        background-color: #2980b9;
+      }
+
+      /* 社交链接样式 */
+      .social-links {
+        display: flex;
+        gap: 15px;
+        margin-top: 20px;
+      }
+
+      .social-links a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background-color: #34495e;
+        border-radius: 50%;
+        color: #ecf0f1;
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+
+      .social-links a:hover {
+        background-color: #3498db;
+        transform: translateY(-3px);
+      }
+
+      /* 底部信息样式 */
+      .footer-bottom {
+        max-width: 1200px;
+        margin: 40px auto 0;
+        padding: 20px;
+        border-top: 1px solid #34495e;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .copyright {
+        color: #bdc3c7;
+        font-size: 0.9rem;
+      }
+
+      .designer {
+        color: #3498db;
+        font-weight: 600;
+      }
+
+      /* 响应式设计 */
+      @media (max-width: 768px) {
+        .footer-container {
+          grid-template-columns: 1fr;
+        }
+
+        .footer-bottom {
+          flex-direction: column;
+          text-align: center;
+          gap: 15px;
+        }
+      }
+    </style>
+
+    <!-- 自定义CSS样式 -->
+    <style>
+      /* 全局样式重置与基础设置 */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background-color: #f8f9fa;
+      }
+
+      /* 自定义动画 */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes progress {
+        from {
+          width: 0;
+        }
+        to {
+          width: var(--progress-width);
+        }
+      }
+
+      /* 自定义工具类 */
+      .animate-fade-in {
+        animation: fadeIn 0.8s ease forwards;
+      }
+
+      .skill-bar {
+        position: relative;
+        height: 8px;
+        border-radius: 4px;
+        background-color: #e0e0e0;
+        overflow: hidden;
+      }
+
+      .skill-progress {
+        height: 100%;
+        border-radius: 4px;
+        background: linear-gradient(90deg, #6366f1, #d946ef);
+        animation: progress 1.5s ease forwards;
+        --progress-width: 0%;
+      }
+
+      /* 时间线样式优化 */
+      .timeline-container {
+        position: relative;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .timeline-container::after {
+        content: "";
+        position: absolute;
+        width: 3px;
+        background-color: #6366f1;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        margin-left: -1.5px;
+      }
+
+      .timeline-item {
+        padding: 10px 40px;
+        position: relative;
+        width: 50%;
+        box-sizing: border-box;
+      }
+
+      .timeline-item::after {
+        content: "";
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background-color: white;
+        border: 4px solid #6366f1;
+        border-radius: 50%;
+        top: 15px;
+        z-index: 1;
+      }
+
+      .timeline-left {
+        left: 0;
+      }
+
+      .timeline-right {
+        left: 50%;
+      }
+
+      .timeline-left::after {
+        right: -10px;
+      }
+
+      .timeline-right::after {
+        left: -10px;
+      }
+
+      .timeline-content {
+        padding: 20px;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease;
+      }
+
+      .timeline-content:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+      }
+
+      /* 响应式调整 */
+      @media screen and (max-width: 768px) {
+        .timeline-container::after {
+          left: 31px;
+        }
+
+        .timeline-item {
+          width: 100%;
+          padding-left: 70px;
+          padding-right: 25px;
+        }
+
+        .timeline-right {
+          left: 0;
+        }
+
+        .timeline-left::after,
+        .timeline-right::after {
+          left: 21px;
+        }
+      }
+
+      /* 按钮样式 */
+      .btn-primary {
+        background: linear-gradient(90deg, #6366f1, #8b5cf6);
+        color: white;
+        border: none;
+        padding: 10px 24px;
+        border-radius: 50px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(99, 102, 241, 0.4);
+      }
+
+      /* 社交图标样式 */
+      .social-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background-color: #f0f4ff;
+        color: #6366f1;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 4px;
+        transition: all 0.3s ease;
+      }
+
+      .social-icon:hover {
+        background: linear-gradient(90deg, #6366f1, #8b5cf6);
+        color: white;
+        transform: translateY(-3px);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 导航栏 -->
+    <header class="dao">
+      <nav class="navbar">
+        <a href="/1个人信息 - 首页.html" class="logo">Code<span>Blog</span></a>
+        <ul class="nav-links">
+          <li><a href="/1个人信息 - 首页.html">首页</a></li>
+          <li><a href="/2博客表页.html">博客</a></li>
+          <li><a href="/4作品集.html">作品集</a></li>
+          <li><a href="/5关于我.html">关于我</a></li>
+          <li><a href="/3文章详情页.html">文章示例</a></li>
+        </ul>
+        <div class="hamburger" onclick="toggleMenu()">☰</div>
+      </nav>
+    </header>
+
+    <!-- 补充JavaScript实现菜单切换 -->
+    <script>
+      // 定义切换菜单的函数
+      function toggleMenu() {
+        // 获取导航链接列表元素
+        const navLinks = document.querySelector(".nav-links");
+        // 切换active类（控制显示/隐藏）
+        navLinks.classList.toggle("active");
+        // 可选：切换汉堡图标样式（☰ ← X）
+        const hamburger = document.querySelector(".hamburger");
+        hamburger.textContent = navLinks.classList.contains("active")
+          ? "✕"
+          : "☰";
+      }
+
+      // 可选：点击非菜单区域时关闭移动端菜单（提升用户体验）
+      document.addEventListener("click", function (e) {
+        const navLinks = document.querySelector(".nav-links");
+        const hamburger = document.querySelector(".hamburger");
+        // 如果点击的不是菜单、不是汉堡按钮，且菜单处于展开状态，则关闭
+        if (
+          !navLinks.contains(e.target) &&
+          e.target !== hamburger &&
+          navLinks.classList.contains("active")
+        ) {
+          navLinks.classList.remove("active");
+          hamburger.textContent = "☰";
+        }
+      });
+    </script>
+
+    <!-- 头部区域 -->
+    <header
+      class="bg-gradient-to-r from-indigo-50 to-purple-50 py-16 text-center"
+    >
+      <h1 class="text-3xl font-bold mb-3 text-gray-800">关于我</h1>
+      <p class="text-base text-gray-600 max-w-lg mx-auto animate-fade-in">
+        一个热爱技术、追求卓越的全栈开发者，在这里分享我的学习旅程与技术思考。
+      </p>
+    </header>
+
+    <!-- 个人信息区域 -->
+    <section
+      class="max-w-5xl mx-auto px-6 py-12 flex flex-col md:flex-row items-center gap-10"
+    >
+      <div
+        class="w-48 h-48 overflow-hidden rounded-xl shadow-lg animate-fade-in"
+        style="animation-delay: 0.2s"
+      >
+        <img
+          src="/img/头像.jpg"
+          alt="xxx头像"
+          class="w-full h-full object-cover"
+        />
+      </div>
+      <div class="text-left animate-fade-in" style="animation-delay: 0.4s">
+        <h2 class="text-2xl font-bold text-indigo-600 mb-3">
+          你好，我是胡洋铭
+        </h2>
+        <p class="text-base mb-6 text-gray-700 leading-relaxed">
+          我是一名大一新生，拥有半年的Web开发经验，半年的平面设计经验。我热爱探索新技术，喜欢解决复杂问题，并将我的学习经验通过博客分享给更多人。<br /><br />
+          我的技术栈涵盖HTML5、CSS3、JavaScript、React、Vue.js和后端Node.js、Python、Django开发。我相信持续学习是技术人才最重要的品质，因此我不断学习新技术，完善自己的知识体系。<br /><br />
+          除了编程，我还热衷于UI/UX设计、绘画、摄影和旅行。我认为好的开发者不仅需要技术能力，还需要对美学和用户体验有深刻的理解。
+        </p>
+        <div class="flex">
+          <a href="/5关于我.html" class="social-icon"
+            ><i class="fab fa-weixin"></i
+          ></a>
+          <a href="/5关于我.html" class="social-icon"
+            ><i class="fab fa-github"></i
+          ></a>
+          <a href="/5关于我.html" class="social-icon"
+            ><i class="fab fa-twitter"></i
+          ></a>
+          <a href="/5关于我.html" class="social-icon"
+            ><i class="fab fa-linkedin"></i
+          ></a>
+          <a href="/5关于我.html" class="social-icon"
+            ><i class="fab fa-youtube"></i
+          ></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 技能区域 -->
+    <section
+      class="max-w-5xl mx-auto px-6 py-12 bg-white rounded-2xl shadow-sm mb-12"
+    >
+      <h2 class="text-2xl font-bold text-center mb-10 text-gray-800">
+        我的技能
+      </h2>
+      <div class="space-y-6 px-4 md:px-12">
+        <!-- HTML5 & CSS3 -->
+        <div class="animate-fade-in" style="animation-delay: 0.1s">
+          <div class="flex justify-between mb-2">
+            <span class="font-medium text-gray-700">HTML5 & CSS3</span>
+            <span class="text-gray-600">95%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-progress" style="--progress-width: 95%"></div>
+          </div>
+        </div>
+        <!-- JavaScript -->
+        <div class="animate-fade-in" style="animation-delay: 0.2s">
+          <div class="flex justify-between mb-2">
+            <span class="font-medium text-gray-700">JavaScript</span>
+            <span class="text-gray-600">90%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-progress" style="--progress-width: 90%"></div>
+          </div>
+        </div>
+        <!-- React & Vue.js -->
+        <div class="animate-fade-in" style="animation-delay: 0.3s">
+          <div class="flex justify-between mb-2">
+            <span class="font-medium text-gray-700">UI/UX设计</span>
+            <span class="text-gray-600">85%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-progress" style="--progress-width: 85%"></div>
+          </div>
+        </div>
+        <!-- Node.js -->
+        <div class="animate-fade-in" style="animation-delay: 0.4s">
+          <div class="flex justify-between mb-2">
+            <span class="font-medium text-gray-700">Node.js</span>
+            <span class="text-gray-600">80%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-progress" style="--progress-width: 80%"></div>
+          </div>
+        </div>
+        <!-- Python -->
+        <div class="animate-fade-in" style="animation-delay: 0.5s">
+          <div class="flex justify-between mb-2">
+            <span class="font-medium text-gray-700">Python</span>
+            <span class="text-gray-600">75%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-progress" style="--progress-width: 75%"></div>
+          </div>
+        </div>
+        <!-- UI/UX设计 -->
+        <div class="animate-fade-in" style="animation-delay: 0.6s">
+          <div class="flex justify-between mb-2">
+            <span class="font-medium text-gray-700">React & Vue.js</span>
+            <span class="text-gray-600">70%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-progress" style="--progress-width: 70%"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 经历区域 -->
+    <section class="max-w-5xl mx-auto px-6 py-12 mb-12">
+      <h2 class="text-2xl font-bold text-center mb-12 text-gray-800">
+        我的旅程
+      </h2>
+      <div class="timeline-container">
+        <!-- 2018年6月 -->
+        <div
+          class="timeline-item timeline-left animate-fade-in"
+          style="animation-delay: 0.1s"
+        >
+          <div class="timeline-content">
+            <div class="text-indigo-600 font-bold mb-1">XXXX年X月</div>
+            <div class="font-bold mb-1 text-gray-800">XXXXXXXXXX</div>
+            <p class="text-gray-600">
+              毕业于XXXX，获得XXXXX。在校期间开始接触Web开发，并对此产生浓厚兴趣。
+            </p>
+          </div>
+        </div>
+        <!-- 2018年9月 -->
+        <div
+          class="timeline-item timeline-right animate-fade-in"
+          style="animation-delay: 0.2s"
+        >
+          <div class="timeline-content">
+            <div class="text-indigo-600 font-bold mb-1">XXXX年X月</div>
+            <div class="font-bold mb-1 text-gray-800">XXXXXXXXXX</div>
+            <p class="text-gray-600">加入XXXXXX，主要负责XXXXXXX。</p>
+          </div>
+        </div>
+        <!-- 2020年3月 -->
+        <div
+          class="timeline-item timeline-left animate-fade-in"
+          style="animation-delay: 0.3s"
+        >
+          <div class="timeline-content">
+            <div class="text-indigo-600 font-bold mb-1">XXXX年X月</div>
+            <div class="font-bold mb-1 text-gray-800">XXXXXXXXXX</div>
+            <p class="text-gray-600">
+              创建个人技术博客，开始系统性地整理和分享自己的学习经验与技术心得。
+            </p>
+          </div>
+        </div>
+        <!-- 2021年1月 -->
+        <div
+          class="timeline-item timeline-right animate-fade-in"
+          style="animation-delay: 0.4s"
+        >
+          <div class="timeline-content">
+            <div class="text-indigo-600 font-bold mb-1">XXXX年X月</div>
+            <div class="font-bold mb-1 text-gray-800">XXXXXXXXXX</div>
+            <p class="text-gray-600">
+              在XXXXXXXXXXXXXX，开始接触后端开发和数据库设计，技术栈得到全面扩展。
+            </p>
+          </div>
+        </div>
+        <!-- 2022年8月 -->
+        <div
+          class="timeline-item timeline-left animate-fade-in"
+          style="animation-delay: 0.5s"
+        >
+          <div class="timeline-content">
+            <div class="text-indigo-600 font-bold mb-1">XXXX年X月</div>
+            <div class="font-bold mb-1 text-gray-800">XXXXXXXXXX</div>
+            <p class="text-gray-600">
+              开始XXXXXXX，参与多个前端框架和工具的社区讨论与开发。
+            </p>
+          </div>
+        </div>
+        <!-- 2023年至今 -->
+        <div
+          class="timeline-item timeline-right animate-fade-in"
+          style="animation-delay: 0.6s"
+        >
+          <div class="timeline-content">
+            <div class="text-indigo-600 font-bold mb-1">XXXX年至今</div>
+            <div class="font-bold mb-1 text-gray-800">技术分享与mentoring</div>
+            <p class="text-gray-600">
+              开始在技术社区进行分享，指导新人开发者，并持续完善个人博客与开源项目。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 联系区域 -->
+    <section
+      class="max-w-5xl mx-auto px-6 py-12 text-center bg-indigo-50 rounded-2xl shadow-sm mb-12"
+    >
+      <h2 class="text-2xl font-bold mb-5 text-gray-800">联系我</h2>
+      <p class="text-base text-gray-600 mb-8 max-w-lg mx-auto">
+        如果你对我的工作感兴趣，或者有任何问题想交流，欢迎通过以下方式联系我。
+      </p>
+      <div class="flex flex-col items-center gap-3 mb-8">
+        <a
+          href="mailto:hello@codeblog.com"
+          class="text-indigo-600 hover:text-indigo-800 flex items-center gap-2 text-base"
+        >
+          <i class="fas fa-envelope"></i> 77981816@QQ.com
+        </a>
+        <a
+          href="tel:+8613800000000"
+          class="text-indigo-600 hover:text-indigo-800 flex items-center gap-2 text-base"
+        >
+          <i class="fas fa-phone"></i> +86 182 2362 6786
+        </a>
+      </div>
+      <button class="btn-primary">发送邮件</button>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+      <div class="footer-container">
+        <!-- 快速链接部分 -->
+        <div class="footer-section">
+          <h3>快速链接</h3>
+          <ul class="footer-links">
+            <li>
+              <a href="/1个人信息 - 首页.html"
+                ><i class="fas fa-home"></i> 首页</a
+              >
+            </li>
+            <li>
+              <a href="/2博客表页.html"><i class="fas fa-blog"></i> 博客文章</a>
+            </li>
+            <li>
+              <a href="/4作品集.html"
+                ><i class="fas fa-briefcase"></i> 作品集</a
+              >
+            </li>
+            <li>
+              <a href="/5关于我.html"><i class="fas fa-user"></i> 关于我</a>
+            </li>
+            <li>
+              <a href="/3文章详情页.html"
+                ><i class="fas fa-envelope"></i> 文章详情页</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <!-- 订阅更新部分 -->
+        <div class="footer-section">
+          <h3>订阅更新</h3>
+          <p>订阅获取最新文章和技术分享</p>
+          <form class="subscribe-form">
+            <input
+              type="email"
+              class="email-input"
+              placeholder="输入您的邮箱"
+              required
+            />
+            <button type="submit" class="subscribe-btn">订阅</button>
+          </form>
+
+          <!-- 搜索框 -->
+          <h3 style="margin-top: 25px">搜索博客</h3>
+          <div class="search-box">
+            <input type="text" class="search-input" placeholder="搜索文章..." />
+            <button class="search-btn"><i class="fas fa-search"></i></button>
+          </div>
+        </div>
+
+        <!-- 社交链接部分 -->
+        <div class="footer-section">
+          <h3>关注我</h3>
+          <p>在这里可以找到我的更多分享</p>
+          <div class="social-links">
+            <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
+            <a href="#" title="知乎"><i class="fab fa-zhihu"></i></a>
+            <a href="#" title="微博"><i class="fab fa-weibo"></i></a>
+            <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" title="微信公众号"><i class="fab fa-weixin"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 底部版权信息 -->
+      <div class="footer-bottom">
+        <div class="copyright">
+          © xxx 保留所有权利。
+          <span class="designer">设计：胡洋铭</span>
+        </div>
+        <div class="copyright">
+          本博客由 xxx 驱动 | 已运行 <span id="days-counter">0</span> 天
+        </div>
+      </div>
+    </footer>
+    <script>
+      // 计算博客运行天数（从2026年1月8日开始）
+      document.addEventListener("DOMContentLoaded", function () {
+        const startDate = new Date("2026-01-08");
+        const currentDate = new Date();
+        const timeDiff = currentDate - startDate;
+        const daysDiff = Math.floor(timeDiff / (1000 * 3600 * 24));
+        document.getElementById("days-counter").textContent = daysDiff;
+
+        // 订阅表单提交处理
+        const subscribeForm = document.querySelector(".subscribe-form");
+        subscribeForm.addEventListener("submit", function (e) {
+          e.preventDefault();
+          const emailInput = this.querySelector(".email-input");
+          if (emailInput.value) {
+            alert(`感谢订阅！我们将发送更新到 ${emailInput.value}`);
+            emailInput.value = "";
+          }
+        });
+
+        // 搜索功能处理
+        const searchBtn = document.querySelector(".search-btn");
+        searchBtn.addEventListener("click", function () {
+          const searchInput = document.querySelector(".search-input");
+          if (searchInput.value.trim()) {
+            alert(`搜索: ${searchInput.value}`);
+          } else {
+            alert("请输入搜索关键词");
+          }
+        });
+
+        // 搜索框回车事件
+        const searchInput = document.querySelector(".search-input");
+        searchInput.addEventListener("keypress", function (e) {
+          if (e.key === "Enter") {
+            searchBtn.click();
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

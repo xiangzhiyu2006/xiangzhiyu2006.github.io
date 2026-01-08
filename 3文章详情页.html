@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>文章详情页</title>
+    <!-- 外部资源优先引入 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- 全局样式重置 -->
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
+      }
+
+      body {
+        background-color: #f5f7fa;
+        color: #333;
+        line-height: 1.6;
+        padding: 20px;
+        padding-top: 80px; /* 关键修改：添加顶部内边距，避开导航栏 */
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+    </style>
+
+    <!-- 导航栏样式 -->
+    <style>
+      .navbar {
+        width: 100%;
+        background-color: #fff;
+        padding: 15px 20px;
+        padding-left: 50px;
+        padding-right: 60px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 999;
+        height: 70px; /* 明确导航栏高度，方便计算body的padding-top */
+        box-sizing: border-box; /* 确保padding不会增加总高度 */
+      }
+
+      .logo {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #000;
+        text-decoration: none;
+      }
+
+      .logo span {
+        color: #6c63ff;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 50px;
+        list-style: none;
+      }
+
+      .nav-links li a {
+        text-decoration: none;
+        color: #333;
+        font-size: 1rem;
+        position: relative;
+        transition: color 0.3s ease 0.1s;
+      }
+
+      .nav-links li a::after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: #007bff;
+        transition: width 0.3s ease 0.1s;
+      }
+
+      .nav-links li a:hover {
+        color: #007bff;
+      }
+
+      .nav-links li a:hover::after {
+        width: 100%;
+      }
+
+      .hamburger {
+        display: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: #333;
+      }
+
+      @media (max-width: 768px) {
+        .nav-links {
+          position: absolute;
+          top: 100%; /* 从导航栏底部开始显示 */
+          left: 0;
+          width: 100%;
+          background-color: #fff;
+          flex-direction: column;
+          padding: 20px;
+          gap: 15px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+          display: none;
+          z-index: 998; /* 确保下拉菜单在导航栏下方 */
+        }
+
+        .nav-links.active {
+          display: flex;
+        }
+
+        .hamburger {
+          display: block;
+        }
+
+        .navbar {
+          padding-left: 20px;
+          padding-right: 20px;
+          height: 60px; /* 移动端导航栏高度稍小 */
+        }
+
+        /* 移动端适配body的padding-top */
+        body {
+          padding-top: 70px;
+        }
+      }
+    </style>
+
+    <!-- 文章头部样式 -->
+    <style>
+      .blog-header {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 40px 20px;
+        text-align: center;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        margin-top: 20px; /* 额外增加一点间距，视觉更舒适 */
+      }
+      .blog-meta {
+        color: #666;
+        font-size: 14px;
+        margin-bottom: 20px;
+        display: flex;
+        gap: 16px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .tag {
+        background: #f5f5f5;
+        padding: 2px 8px;
+        border-radius: 4px;
+      }
+      .blog-title {
+        font-size: 36px;
+        font-weight: 700;
+        margin: 10px 0;
+        position: relative;
+        display: inline-block;
+      }
+      .blog-title::after {
+        content: "";
+        display: block;
+        width: 60px;
+        height: 3px;
+        background: #e91e63;
+        margin: 12px auto 0;
+      }
+      .blog-subtitle {
+        color: #888;
+        font-size: 18px;
+        margin-top: 16px;
+      }
+    </style>
+
+    <!-- 文章内容样式 -->
+    <style>
+      /* 代码块样式 */
+      .code-block {
+        background-color: #1a1a1a;
+        color: #f8f8f2;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        overflow-x: auto;
+        font-family: "Consolas", "Monaco", monospace;
+        font-size: 0.9rem;
+        line-height: 1.5;
+      }
+      .code-block .keyword {
+        color: #ff79c6;
+      }
+      .code-block .property {
+        color: #8be9fd;
+      }
+      .code-block .value {
+        color: #f1fa8c;
+      }
+      .code-block .selector {
+        color: #50fa7b;
+      }
+      .code-block .comment {
+        color: #6272a4;
+      }
+      /* 行内代码样式（改用标准code标签） */
+      code {
+        background-color: #f3f4f6;
+        padding: 0.125rem 0.25rem;
+        border-radius: 0.25rem;
+        font-family: monospace;
+        font-size: 0.9em;
+      }
+      /* 分享按钮样式 */
+      .share-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.5rem 1rem;
+        border-radius: 0.375rem;
+        color: white;
+        font-size: 0.875rem;
+        font-weight: 500;
+        transition: background-color 0.2s ease;
+        text-decoration: none;
+        margin-right: 0.5rem;
+        margin-bottom: 0.5rem;
+      }
+      .share-btn svg {
+        margin-right: 0.375rem;
+        width: 16px;
+        height: 16px;
+      }
+    </style>
+
+    <!-- 页脚样式 -->
+    <style>
+      footer {
+        background-color: #2c3e50;
+        color: #ecf0f1;
+        padding: 40px 0 20px;
+        border-radius: 10px 10px 0 0;
+        box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.1);
+        margin-top: 40px;
+      }
+
+      .footer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+      }
+
+      .footer-section h3 {
+        color: #3498db;
+        font-size: 1.3rem;
+        margin-bottom: 20px;
+        position: relative;
+        padding-bottom: 8px;
+      }
+
+      .footer-section h3::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 40px;
+        height: 3px;
+        background-color: #e74c3c;
+      }
+
+      /* 快速链接样式 */
+      .footer-links {
+        list-style: none;
+      }
+
+      .footer-links li {
+        margin-bottom: 10px;
+      }
+
+      .footer-links a {
+        color: #bdc3c7;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+      }
+
+      .footer-links a:hover {
+        color: #3498db;
+        transform: translateX(5px);
+      }
+
+      .footer-links i {
+        margin-right: 8px;
+        width: 20px;
+        text-align: center;
+      }
+
+      /* 订阅区域样式 */
+      .subscribe-form {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .subscribe-form p {
+        color: #bdc3c7;
+        margin-bottom: 15px;
+        font-size: 0.95rem;
+      }
+
+      .email-input {
+        padding: 12px 15px;
+        border: none;
+        border-radius: 5px;
+        margin-bottom: 12px;
+        font-size: 1rem;
+        background-color: #34495e;
+        color: #ecf0f1;
+      }
+
+      .email-input::placeholder {
+        color: #95a5a6;
+      }
+
+      .subscribe-btn {
+        background-color: #e74c3c;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 5px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        font-weight: 600;
+      }
+
+      .subscribe-btn:hover {
+        background-color: #c0392b;
+      }
+
+      /* 搜索框样式 */
+      .search-box {
+        display: flex;
+        margin-top: 10px;
+      }
+
+      .search-input {
+        flex-grow: 1;
+        padding: 12px 15px;
+        border: none;
+        border-radius: 5px 0 0 5px;
+        background-color: #34495e;
+        color: #ecf0f1;
+        font-size: 1rem;
+      }
+
+      .search-btn {
+        background-color: #3498db;
+        color: white;
+        border: none;
+        padding: 0 20px;
+        border-radius: 0 5px 5px 0;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .search-btn:hover {
+        background-color: #2980b9;
+      }
+
+      /* 社交链接样式 */
+      .social-links {
+        display: flex;
+        gap: 15px;
+        margin-top: 20px;
+      }
+
+      .social-links a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background-color: #34495e;
+        border-radius: 50%;
+        color: #ecf0f1;
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+
+      .social-links a:hover {
+        background-color: #3498db;
+        transform: translateY(-3px);
+      }
+
+      /* 底部信息样式 */
+      .footer-bottom {
+        max-width: 1200px;
+        margin: 40px auto 0;
+        padding: 20px;
+        border-top: 1px solid #34495e;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .copyright {
+        color: #bdc3c7;
+        font-size: 0.9rem;
+      }
+
+      .designer {
+        color: #3498db;
+        font-weight: 600;
+      }
+
+      /* 响应式设计 */
+      @media (max-width: 768px) {
+        .footer-container {
+          grid-template-columns: 1fr;
+        }
+
+        .footer-bottom {
+          flex-direction: column;
+          text-align: center;
+          gap: 15px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 导航栏 -->
+    <header class="dao">
+      <nav class="navbar">
+        <a href="/1个人信息 - 首页.html" class="logo">Code<span>Blog</span></a>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="/1个人信息 - 首页.html">首页</a></li>
+          <li><a href="/2博客表页.html">博客</a></li>
+          <li><a href="/4作品集.html">作品集</a></li>
+          <li><a href="/5关于我.html">关于我</a></li>
+          <li><a href="/3文章详情页.html">文章示例</a></li>
+        </ul>
+        <div class="hamburger" onclick="toggleMenu()">☰</div>
+      </nav>
+    </header>
+
+    <!-- 文章头部 -->
+    <header class="blog-header">
+      <div class="blog-meta">
+        <span class="meta-item">📅 发布日期：2026年1月8日</span>
+        <span class="meta-item">🔄 更新时间：2026年1月8日</span>
+        <span class="meta-item tag">
+          <span class="tag-bg">前端开发</span>
+        </span>
+      </div>
+      <h1 class="blog-title">深入理解CSS Grid布局</h1>
+      <p class="blog-subtitle">现代Web开发中最强大的布局系统完全指南</p>
+    </header>
+
+    <!-- 文章主体 + 侧边栏 -->
+    <div class="container mx-auto px-4 py-8 flex flex-col md:flex-row gap-8">
+      <!-- 文章主体（左侧） -->
+      <main class="md:w-2/3 bg-white rounded-lg shadow p-6">
+        <!-- 文章头部信息 -->
+        <div class="mb-8 border-b pb-6">
+          <h1 class="text-3xl font-bold mb-4">深入理解 CSS Grid 布局</h1>
+          <div class="flex flex-wrap gap-3 text-gray-500 text-sm">
+            <span
+              ><svg
+                class="inline w-4 h-4 mr-1"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                ></path>
+              </svg>
+              发布日期：2026-01-08</span
+            >
+            <span
+              ><svg
+                class="inline w-4 h-4 mr-1"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                ></path>
+              </svg>
+              更新时间：2026-01-08</span
+            >
+            <span class="bg-blue-100 text-blue-600 px-2 py-1 rounded"
+              ><svg
+                class="inline w-4 h-4 mr-1"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"
+                ></path>
+              </svg>
+              CSS</span
+            >
+            <span class="bg-blue-100 text-blue-600 px-2 py-1 rounded"
+              ><svg
+                class="inline w-4 h-4 mr-1"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"
+                ></path>
+              </svg>
+              布局</span
+            >
+          </div>
+        </div>
+
+        <!-- 文章内容 -->
+        <div class="prose max-w-none">
+          <!-- 封面图 -->
+          <div class="my-6">
+            <img
+              src="https://picsum.photos/id/0/800/400"
+              alt="CSS Grid 代码图"
+              class="w-full h-auto rounded-lg shadow-sm"
+            />
+          </div>
+
+          <!-- 引言 -->
+          <p class="mb-4">
+            在过去的几年里，CSS Grid
+            已经彻底改变了我们构建网页布局的方式。作为现代 CSS
+            中最强大的布局系统，它让我们摆脱了一种布局的局限性，我们能够轻松创建复杂、响应式的设计。
+          </p>
+
+          <!-- 什么是 CSS Grid 布局？ -->
+          <h2 class="text-2xl font-bold mt-8 mb-4 text-blue-600">
+            什么是 CSS Grid 布局？
+          </h2>
+          <p class="mb-4">
+            CSS Grid 是一个二维布局系统，这个模型可以同时处理行和列。这与
+            Flexbox（一维布局系统）形成鲜明对比——Flexbox
+            只能处理单个行或列的布局。
+          </p>
+          <p class="mb-4">
+            Grid
+            的布局思想是先将容器划分成“网格”（行和列），然后将子元素放置在这些网格的任意位置，这使得网页布局的结构变得非常简洁和高效。
+          </p>
+
+          <!-- 基本概念 -->
+          <h2 class="text-2xl font-bold mt-8 mb-4 text-blue-600">基本概念</h2>
+          <p class="mb-4">在使用 CSS Grid 之前，理解一些基本概念非常重要：</p>
+
+          <h3 class="text-xl font-bold mt-6 mb-3">1. Grid 容器</h3>
+          <p class="mb-3">
+            通过将元素的 <code>display</code> 属性设置为 <code>grid</code> 或
+            <code>inline-grid</code>，可以将其定义为 Grid 容器。
+          </p>
+          <div class="code-block my-3">
+            <span class="selector">.container</span> {<br />
+            &nbsp;&nbsp;<span class="property">display</span>:
+            <span class="value">grid</span>;<br />
+            }
+          </div>
+
+          <!-- 创建基本网格 -->
+          <h2 class="text-2xl font-bold mt-8 mb-4 text-blue-600">
+            创建基本网格
+          </h2>
+          <p class="mb-3">让我们创建一个简单的 3x3 网格：</p>
+          <div class="code-block my-3">
+            <span class="selector">.grid-container</span> {<br />
+            &nbsp;&nbsp;<span class="property">display</span>:
+            <span class="value">grid</span>;<br />
+            &nbsp;&nbsp;<span class="property">grid-template-columns</span>:
+            <span class="value">100px 100px 100px</span>;
+            <span class="comment">/* 3列，每列100px宽 */</span><br />
+            &nbsp;&nbsp;<span class="property">grid-template-rows</span>:
+            <span class="value">100px 100px 100px</span>;
+            <span class="comment">/* 3行，每行100px高 */</span><br />
+            &nbsp;&nbsp;<span class="property">gap</span>:
+            <span class="value">10px</span>;
+            <span class="comment">/* 网格间距 */</span><br />
+            }
+          </div>
+          <p class="mb-4">在这个例子中：</p>
+          <ul class="list-disc pl-6 mb-4 space-y-1">
+            <li>
+              <code>grid-template-columns</code> 定义了 3 列，每列 100px 宽
+            </li>
+            <li><code>grid-template-rows</code> 定义了 3 行，每行 100px 高</li>
+            <li><code>gap</code> 设置了网格之间的间距为 10px</li>
+          </ul>
+
+          <!-- 响应式网格示例 -->
+          <div class="bg-blue-50 border-l-4 border-blue-500 p-4 my-6 rounded-r">
+            <h4 class="font-bold mb-2">示例：创建响应式网格</h4>
+            <p class="mb-2">
+              使用 <code>repeat()</code> 函数和
+              <code>minmax()</code> 函数可以创建响应式网格：
+            </p>
+            <div class="code-block my-2">
+              <span class="selector">.responsive-grid</span> {<br />
+              &nbsp;&nbsp;<span class="property">display</span>:
+              <span class="value">grid</span>;<br />
+              &nbsp;&nbsp;<span class="property">grid-template-columns</span>:
+              <span class="value">repeat(auto-fit, minmax(200px, 1fr))</span
+              >;<br />
+              &nbsp;&nbsp;<span class="property">gap</span>:
+              <span class="value">1rem</span>;<br />
+              }
+            </div>
+            <p>
+              这个代码会创建尽可能多的列，每列最小 200px 宽，最大
+              1fr（剩余空间的一部分），当空间不够时自动换行。
+            </p>
+          </div>
+
+          <!-- 总结 -->
+          <h2 class="text-2xl font-bold mt-8 mb-4 text-blue-600">总结</h2>
+          <p class="mb-4">
+            CSS Grid 是现代 Web
+            开发中不可或缺的工具。它提供了强大的二维布局能力，我们能够创建复杂、响应式的设计，而无需依赖复杂的嵌套或
+            Hack 技巧。
+          </p>
+          <p>
+            Grid 和 Flexbox
+            并不是竞争关系，而是互补的。在实际项目中，我们通常同时使用两者：Grid
+            用于整体页面布局，Flexbox 用于组件内部布局。
+          </p>
+        </div>
+
+        <!-- 文章底部 -->
+        <div class="mt-10 border-t pt-6">
+          <!-- 上下篇导航 -->
+          <div class="flex flex-col md:flex-row justify-between gap-4 mb-6">
+            <a
+              href="#"
+              class="flex items-center gap-2 text-blue-600 hover:underline"
+            >
+              <svg
+                class="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15 19l-7-7 7-7"
+                ></path>
+              </svg>
+              上一篇：Flexbox 弹性布局详解
+            </a>
+            <a
+              href="#"
+              class="flex items-center gap-2 text-blue-600 hover:underline justify-end"
+            >
+              下一篇：CSS 响应式设计实战
+              <svg
+                class="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 5l7 7-7 7"
+                ></path>
+              </svg>
+            </a>
+          </div>
+
+          <!-- 分享按钮 -->
+          <div class="mb-6">
+            <span class="text-gray-500 mr-3 inline-block mb-2">分享到：</span>
+            <div class="flex flex-wrap items-center">
+              <a href="#" class="share-btn bg-blue-600 hover:bg-blue-700">
+                <svg
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"
+                  ></path>
+                </svg>
+                微博
+              </a>
+              <a href="#" class="share-btn bg-green-600 hover:bg-green-700">
+                <svg
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"
+                  ></path>
+                </svg>
+                微信
+              </a>
+              <a href="#" class="share-btn bg-sky-500 hover:bg-sky-600">
+                <svg
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723 10.054 10.054 0 01-3.127 1.184 4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.937 4.937 0 004.604 3.417 9.868 9.868 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"
+                  ></path>
+                </svg>
+                Twitter
+              </a>
+              <a href="#" class="share-btn bg-indigo-600 hover:bg-indigo-700">
+                <svg
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
+                  ></path>
+                </svg>
+                LinkedIn
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 评论区 -->
+        <div class="mt-10">
+          <h2 class="text-2xl font-bold mb-6">评论 (2)</h2>
+
+          <!-- 评论列表 -->
+          <div class="space-y-6 mb-8">
+            <div class="flex gap-4">
+              <img
+                src="https://picsum.photos/id/1/60/60"
+                alt="用户头像"
+                class="w-12 h-12 rounded-full"
+              />
+              <div class="flex-1">
+                <div class="flex justify-between items-center mb-1">
+                  <h4 class="font-bold">刘春辉</h4>
+                  <span class="text-sm text-gray-500">2026-01-08</span>
+                </div>
+                <p class="text-gray-700">
+                  非常详细的 Grid 教程！之前一直用 Flexbox 做布局，现在终于搞懂
+                  Grid 了，这篇文章帮我理清了很多概念，感谢作者！
+                </p>
+                <button class="text-blue-600 text-sm hover:underline mt-2">
+                  回复
+                </button>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <img
+                src="https://picsum.photos/id/2/60/60"
+                alt="用户头像"
+                class="w-12 h-12 rounded-full"
+              />
+              <div class="flex-1">
+                <div class="flex justify-between items-center mb-1">
+                  <h4 class="font-bold">吴夏林</h4>
+                  <span class="text-sm text-gray-500">2026-01-08</span>
+                </div>
+                <p class="text-gray-700">
+                  作为一个设计师，以前经常被开发说“这个布局不好实现”，现在我学了
+                  Grid 的基础，终于可以和开发沟通更顺畅了，Flexbox 和 Grid
+                  都好有用！
+                </p>
+                <button class="text-blue-600 text-sm hover:underline mt-2">
+                  回复
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 评论表单 -->
+          <div class="bg-gray-50 p-6 rounded-lg">
+            <h3 class="text-xl font-bold mb-4">发表评论</h3>
+            <form id="commentForm">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div>
+                  <label
+                    for="name"
+                    class="block text-sm font-medium text-gray-700 mb-1"
+                    >姓名 *</label
+                  >
+                  <input
+                    type="text"
+                    id="name"
+                    class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    required
+                  />
+                </div>
+                <div>
+                  <label
+                    for="email"
+                    class="block text-sm font-medium text-gray-700 mb-1"
+                    >邮箱 *</label
+                  >
+                  <input
+                    type="email"
+                    id="email"
+                    class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="mb-4">
+                <label
+                  for="comment"
+                  class="block text-sm font-medium text-gray-700 mb-1"
+                  >评论内容 *</label
+                >
+                <textarea
+                  id="comment"
+                  rows="4"
+                  class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  required
+                ></textarea>
+              </div>
+              <button
+                type="submit"
+                class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+              >
+                提交评论
+              </button>
+            </form>
+          </div>
+        </div>
+      </main>
+
+      <!-- 侧边栏（右侧） -->
+      <aside class="md:w-1/3 space-y-6">
+        <!-- 作者信息 -->
+        <div class="bg-white rounded-lg shadow p-6">
+          <div class="flex flex-col items-center text-center">
+            <img
+              src="/img/头像.jpg"
+              alt="作者头像"
+              class="w-20 h-20 rounded-full mb-3"
+            />
+            <h3 class="text-xl font-bold mb-1">见习前端开发狮</h3>
+            <p class="text-gray-500 text-sm mb-3">专注于前端技术分享</p>
+            <div class="flex gap-2">
+              <a
+                href="#"
+                class="text-blue-600 hover:text-blue-700"
+                title="GitHub"
+              >
+                <svg
+                  class="w-5 h-5"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+              </a>
+              <a
+                href="#"
+                class="text-blue-600 hover:text-blue-700"
+                title="知乎"
+              >
+                <svg
+                  class="w-5 h-5"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm4.441 16.892c-2.102.144-6.784.144-8.883 0C5.282 16.736 5.017 15.622 5 12c.017-3.629.285-4.736 2.558-4.892 2.099-.144 6.782-.144 8.883 0C18.718 7.264 18.982 8.378 19 12c-.018 3.629-.285 4.736-2.559 4.892zM10 9.658l4.917 2.338L10 14.342V9.658z"
+                  ></path>
+                </svg>
+              </a>
+              <a
+                href="#"
+                class="text-blue-600 hover:text-blue-700"
+                title="Instagram"
+              >
+                <svg
+                  class="w-5 h-5"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
+                  ></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 热门文章 -->
+        <div class="bg-white rounded-lg shadow p-6">
+          <h3 class="text-xl font-bold mb-4 border-b pb-2">热门文章</h3>
+          <ul class="space-y-3">
+            <li class="flex gap-3">
+              <img
+                src="https://picsum.photos/id/4/80/60"
+                alt="文章缩略图"
+                class="w-20 h-16 object-cover rounded"
+              />
+              <div>
+                <a
+                  href="#"
+                  class="text-gray-800 hover:text-blue-600 font-medium text-sm line-clamp-2"
+                  >JavaScript 异步编程：从回调到 Promise 再到 Async/Await</a
+                >
+                <p class="text-gray-500 text-xs mt-1">阅读量：1200</p>
+              </div>
+            </li>
+            <li class="flex gap-3">
+              <img
+                src="https://picsum.photos/id/5/80/60"
+                alt="文章缩略图"
+                class="w-20 h-16 object-cover rounded"
+              />
+              <div>
+                <a
+                  href="#"
+                  class="text-gray-800 hover:text-blue-600 font-medium text-sm line-clamp-2"
+                  >CSS 变量：让你的样式更灵活、更易维护</a
+                >
+                <p class="text-gray-500 text-xs mt-1">阅读量：980</p>
+              </div>
+            </li>
+            <li class="flex gap-3">
+              <img
+                src="https://picsum.photos/id/6/80/60"
+                alt="文章缩略图"
+                class="w-20 h-16 object-cover rounded"
+              />
+              <div>
+                <a
+                  href="#"
+                  class="text-gray-800 hover:text-blue-600 font-medium text-sm line-clamp-2"
+                  >React Hooks 从入门到精通：常用 Hooks 实战</a
+                >
+                <p class="text-gray-500 text-xs mt-1">阅读量：1500</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- 分类标签 -->
+        <div class="bg-white rounded-lg shadow p-6">
+          <h3 class="text-xl font-bold mb-4 border-b pb-2">文章分类</h3>
+          <div class="flex flex-wrap gap-2">
+            <a
+              href="#"
+              class="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-sm hover:bg-blue-200"
+              >CSS</a
+            >
+            <a
+              href="#"
+              class="px-3 py-1 bg-green-100 text-green-600 rounded-full text-sm hover:bg-green-200"
+              >JavaScript</a
+            >
+            <a
+              href="#"
+              class="px-3 py-1 bg-purple-100 text-purple-600 rounded-full text-sm hover:bg-purple-200"
+              >React</a
+            >
+            <a
+              href="#"
+              class="px-3 py-1 bg-orange-100 text-orange-600 rounded-full text-sm hover:bg-orange-200"
+              >Vue</a
+            >
+            <a
+              href="#"
+              class="px-3 py-1 bg-red-100 text-red-600 rounded-full text-sm hover:bg-red-200"
+              >性能优化</a
+            >
+            <a
+              href="#"
+              class="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-sm hover:bg-gray-200"
+              >工程化</a
+            >
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- 页脚 -->
+    <footer>
+      <div class="footer-container">
+        <!-- 快速链接 -->
+        <div class="footer-section">
+          <h3>快速链接</h3>
+          <ul class="footer-links">
+            <li>
+              <a href="/1个人信息 - 首页.html"
+                ><i class="fas fa-home"></i> 首页</a
+              >
+            </li>
+            <li>
+              <a href="/2博客表页.html"><i class="fas fa-blog"></i> 博客文章</a>
+            </li>
+            <li>
+              <a href="/4作品集.html"
+                ><i class="fas fa-briefcase"></i> 作品集</a
+              >
+            </li>
+            <li>
+              <a href="/5关于我.html"><i class="fas fa-user"></i> 关于我</a>
+            </li>
+            <li>
+              <a href="/3文章详情页.html"
+                ><i class="fas fa-file-alt"></i> 文章详情页</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <!-- 订阅更新 -->
+        <div class="footer-section">
+          <h3>订阅更新</h3>
+          <p>订阅获取最新文章和技术分享</p>
+          <form class="subscribe-form" id="subscribeForm">
+            <input
+              type="email"
+              class="email-input"
+              placeholder="输入您的邮箱"
+              required
+            />
+            <button type="submit" class="subscribe-btn">订阅</button>
+          </form>
+
+          <!-- 搜索框 -->
+          <h3 style="margin-top: 25px">搜索博客</h3>
+          <div class="search-box">
+            <input
+              type="text"
+              class="search-input"
+              placeholder="搜索文章..."
+              id="searchInput"
+            />
+            <button class="search-btn" id="searchBtn">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- 社交链接 -->
+        <div class="footer-section">
+          <h3>关注我</h3>
+          <p>在这里可以找到我的更多分享</p>
+          <div class="social-links">
+            <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
+            <a href="#" title="知乎"><i class="fab fa-zhihu"></i></a>
+            <a href="#" title="微博"><i class="fab fa-weibo"></i></a>
+            <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" title="微信公众号"><i class="fab fa-weixin"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 底部版权信息 -->
+      <div class="footer-bottom">
+        <div class="copyright">
+          © xxx 保留所有权利。
+          <span class="designer">设计：胡洋铭</span>
+        </div>
+        <div class="copyright">
+          本博客由 xxx 驱动 | 已运行 <span id="days-counter">0</span> 天
+        </div>
+      </div>
+    </footer>
+
+    <!-- 脚本 -->
+    <script>
+      // 汉堡菜单切换
+      function toggleMenu() {
+        const navLinks = document.getElementById("navLinks");
+        navLinks.classList.toggle("active");
+      }
+
+      // 页面加载完成后执行
+      document.addEventListener("DOMContentLoaded", function () {
+        // 计算运行天数
+        const startDate = new Date("2026-01-08");
+        const currentDate = new Date();
+        const timeDiff = currentDate - startDate;
+        const daysDiff = Math.floor(timeDiff / (1000 * 3600 * 24));
+        document.getElementById("days-counter").textContent = Math.max(
+          0,
+          daysDiff
+        );
+
+        // 订阅表单处理
+        const subscribeForm = document.getElementById("subscribeForm");
+        subscribeForm.addEventListener("submit", function (e) {
+          e.preventDefault();
+          const emailInput = this.querySelector(".email-input");
+          if (emailInput.value) {
+            alert(`感谢订阅！我们将发送更新到 ${emailInput.value}`);
+            emailInput.value = "";
+          }
+        });
+
+        // 搜索功能
+        const searchBtn = document.getElementById("searchBtn");
+        const searchInput = document.getElementById("searchInput");
+
+        const handleSearch = () => {
+          const keyword = searchInput.value.trim();
+          if (keyword) {
+            alert(`正在搜索: ${keyword}，功能待实现`);
+          } else {
+            alert("请输入搜索关键词");
+          }
+        };
+
+        searchBtn.addEventListener("click", handleSearch);
+        searchInput.addEventListener("keypress", function (e) {
+          if (e.key === "Enter") handleSearch();
+        });
+
+        // 评论表单处理
+        const commentForm = document.getElementById("commentForm");
+        commentForm.addEventListener("submit", function (e) {
+          e.preventDefault();
+          const name = document.getElementById("name").value;
+          const email = document.getElementById("email").value;
+          const comment = document.getElementById("comment").value;
+
+          if (name && email && comment) {
+            alert(
+              `感谢 ${name} 的评论！评论内容：${comment.substring(0, 50)}...`
+            );
+            commentForm.reset();
+          } else {
+            alert("请填写所有必填字段");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

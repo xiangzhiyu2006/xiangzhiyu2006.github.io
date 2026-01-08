@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>我的作品集</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      .filter-btn.active {
+        @apply border-b-2 border-purple-600 text-purple-600 font-medium;
+      }
+      .card-hover {
+        @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+      }
+    </style>
+
+    <!-- 页脚样式 -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
+      }
+
+      /* 页脚样式 */
+      footer {
+        background-color: #2c3e50;
+        color: #ecf0f1;
+        padding: 40px 0 20px;
+        border-radius: 10px 10px 0 0;
+        box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .footer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+      }
+
+      .footer-section h3 {
+        color: #3498db;
+        font-size: 1.3rem;
+        margin-bottom: 20px;
+        position: relative;
+        padding-bottom: 8px;
+      }
+
+      .footer-section h3::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 40px;
+        height: 3px;
+        background-color: #e74c3c;
+      }
+
+      /* 快速链接样式 */
+      .footer-links {
+        list-style: none;
+      }
+
+      .footer-links li {
+        margin-bottom: 10px;
+      }
+
+      .footer-links a {
+        color: #bdc3c7;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+      }
+
+      .footer-links a:hover {
+        color: #3498db;
+        transform: translateX(5px);
+      }
+
+      .footer-links i {
+        margin-right: 8px;
+        width: 20px;
+        text-align: center;
+      }
+
+      /* 订阅区域样式 */
+      .subscribe-form {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .subscribe-form p {
+        color: #bdc3c7;
+        margin-bottom: 15px;
+        font-size: 0.95rem;
+      }
+
+      .email-input {
+        padding: 12px 15px;
+        border: none;
+        border-radius: 5px;
+        margin-bottom: 12px;
+        font-size: 1rem;
+        background-color: #34495e;
+        color: #ecf0f1;
+      }
+
+      .email-input::placeholder {
+        color: #95a5a6;
+      }
+
+      .subscribe-btn {
+        background-color: #e74c3c;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 5px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        font-weight: 600;
+      }
+
+      .subscribe-btn:hover {
+        background-color: #c0392b;
+      }
+
+      /* 搜索框样式 */
+      .search-box {
+        display: flex;
+        margin-top: 10px;
+      }
+
+      .search-input {
+        flex-grow: 1;
+        padding: 12px 15px;
+        border: none;
+        border-radius: 5px 0 0 5px;
+        background-color: #34495e;
+        color: #ecf0f1;
+        font-size: 1rem;
+      }
+
+      .search-btn {
+        background-color: #3498db;
+        color: white;
+        border: none;
+        padding: 0 20px;
+        border-radius: 0 5px 5px 0;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .search-btn:hover {
+        background-color: #2980b9;
+      }
+
+      /* 社交链接样式 */
+      .social-links {
+        display: flex;
+        gap: 15px;
+        margin-top: 20px;
+      }
+
+      .social-links a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background-color: #34495e;
+        border-radius: 50%;
+        color: #ecf0f1;
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+
+      .social-links a:hover {
+        background-color: #3498db;
+        transform: translateY(-3px);
+      }
+
+      /* 底部信息样式 */
+      .footer-bottom {
+        max-width: 1200px;
+        margin: 40px auto 0;
+        padding: 20px;
+        border-top: 1px solid #34495e;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .copyright {
+        color: #bdc3c7;
+        font-size: 0.9rem;
+      }
+
+      .designer {
+        color: #3498db;
+        font-weight: 600;
+      }
+
+      /* 响应式设计 */
+      @media (max-width: 768px) {
+        .footer-container {
+          grid-template-columns: 1fr;
+        }
+
+        .footer-bottom {
+          flex-direction: column;
+          text-align: center;
+          gap: 15px;
+        }
+      }
+    </style>
+
+    <!-- 重置默认样式，避免不同浏览器差异 -->
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Microsoft Yahei", sans-serif;
+      }
+
+      /* 关键修改：添加与导航栏高度匹配的顶部内边距 */
+      body {
+        padding-top: 80px; /* 适配导航栏高度，避免内容被遮挡 */
+        background-color: #f9fafb;
+      }
+
+      .navbar {
+        width: 100%;
+        background-color: #fff;
+        padding: 15px 20px;
+        padding-left: 50px;
+        padding-right: 60px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 999;
+        height: 80px; /* 固定导航栏高度，方便计算body的padding-top */
+        box-sizing: border-box; /* 确保padding不会增加总高度 */
+      }
+
+      .logo {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #000;
+        text-decoration: none;
+      }
+
+      .logo span {
+        color: #6c63ff;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 50px;
+        list-style: none;
+      }
+
+      .nav-links li a {
+        text-decoration: none;
+        color: #333;
+        font-size: 1rem;
+        position: relative;
+        transition: color 0.3s ease 0.1s;
+      }
+
+      .nav-links li a::after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: #007bff;
+        transition: width 0.3s ease 0.1s;
+      }
+
+      .nav-links li a:hover {
+        color: #007bff;
+      }
+
+      .nav-links li a:hover::after {
+        width: 100%;
+      }
+
+      .hamburger {
+        display: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: #333;
+        /* 避免点击时选中文字 */
+        user-select: none;
+      }
+
+      @media (max-width: 768px) {
+        .nav-links {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          width: 100%;
+          background-color: #fff;
+          flex-direction: column;
+          padding: 20px 30px;
+          gap: 15px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+          display: none;
+        }
+
+        .nav-links.active {
+          display: flex;
+        }
+
+        .hamburger {
+          display: block;
+        }
+
+        .navbar {
+          padding-left: 20px;
+          padding-right: 20px;
+          height: 70px; /* 移动端导航栏高度稍小 */
+        }
+
+        /* 移动端适配body的padding-top */
+        body {
+          padding-top: 70px;
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 font-sans text-gray-800">
+    <!-- 导航栏 -->
+    <header class="dao">
+      <nav class="navbar">
+        <a href="/1个人信息 - 首页.html" class="logo">Code<span>Blog</span></a>
+        <ul class="nav-links">
+          <li><a href="/1个人信息 - 首页.html">首页</a></li>
+          <li><a href="/2博客表页.html">博客</a></li>
+          <li><a href="/4作品集.html">作品集</a></li>
+          <li><a href="/5关于我.html">关于我</a></li>
+          <li><a href="/3文章详情页.html">文章示例</a></li>
+        </ul>
+        <div class="hamburger" onclick="toggleMenu()">☰</div>
+      </nav>
+    </header>
+
+    <!-- 补充JavaScript实现菜单切换 -->
+    <script>
+      // 定义切换菜单的函数
+      function toggleMenu() {
+        // 获取导航链接列表元素
+        const navLinks = document.querySelector(".nav-links");
+        // 切换active类（控制显示/隐藏）
+        navLinks.classList.toggle("active");
+        // 可选：切换汉堡图标样式（☰ ← X）
+        const hamburger = document.querySelector(".hamburger");
+        hamburger.textContent = navLinks.classList.contains("active")
+          ? "✕"
+          : "☰";
+      }
+
+      // 可选：点击非菜单区域时关闭移动端菜单（提升用户体验）
+      document.addEventListener("click", function (e) {
+        const navLinks = document.querySelector(".nav-links");
+        const hamburger = document.querySelector(".hamburger");
+        // 如果点击的不是菜单、不是汉堡按钮，且菜单处于展开状态，则关闭
+        if (
+          !navLinks.contains(e.target) &&
+          e.target !== hamburger &&
+          navLinks.classList.contains("active")
+        ) {
+          navLinks.classList.remove("active");
+          hamburger.textContent = "☰";
+        }
+      });
+    </script>
+
+    <!-- 头部区域 -->
+    <header
+      class="bg-gradient-to-r from-pink-50 to-purple-50 py-12 text-center"
+    >
+      <h1 class="text-2xl font-bold mb-2">我的作品集</h1>
+      <p class="text-sm text-gray-600 max-w-md mx-auto">
+        这里展示了我近年来完成的主要项目，覆盖了Web应用、移动应用、设计系统等多个领域。
+      </p>
+    </header>
+
+    <!-- 筛选栏 -->
+    <section class="max-w-6xl mx-auto px-4 py-6">
+      <div
+        class="flex flex-wrap gap-4 justify-center border-b border-gray-200 pb-2"
+      >
+        <button class="filter-btn active px-3 py-1">全部</button>
+        <button class="filter-btn px-3 py-1">Web应用</button>
+        <button class="filter-btn px-3 py-1">移动应用</button>
+        <button class="filter-btn px-3 py-1">UI/UX设计</button>
+        <button class="filter-btn px-3 py-1">开源项目</button>
+      </div>
+    </section>
+
+    <!-- 项目卡片网格 -->
+    <section class="max-w-6xl mx-auto px-4 py-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- 项目1 -->
+        <div class="bg-white rounded-lg overflow-hidden shadow-sm card-hover">
+          <img
+            src="https://picsum.photos/400/250?random=1"
+            alt="响应式电商平台"
+            class="w-full h-48 object-cover"
+          />
+          <div class="p-4">
+            <h3 class="font-bold mb-1">响应式电商平台</h3>
+            <p class="text-sm text-gray-600 mb-2">
+              一个完整的电商平台，包含商品展示、购物、用户认证、支付等功能，采用React+Node.js+MongoDB。
+            </p>
+            <div class="flex flex-wrap gap-2 mb-3">
+              <span class="text-xs bg-blue-50 text-blue-600 px-2 py-1 rounded"
+                >React</span
+              >
+              <span class="text-xs bg-blue-50 text-blue-600 px-2 py-1 rounded"
+                >Node.js</span
+              >
+            </div>
+            <div class="flex gap-2">
+              <button
+                class="px-3 py-1 bg-blue-50 text-blue-600 rounded text-sm"
+              >
+                在线演示
+              </button>
+              <button class="px-3 py-1 bg-blue-600 text-white rounded text-sm">
+                查看源码
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 项目2 -->
+        <div class="bg-white rounded-lg overflow-hidden shadow-sm card-hover">
+          <img
+            src="https://picsum.photos/400/250?random=2"
+            alt="智能健身助手App"
+            class="w-full h-48 object-cover"
+          />
+          <div class="p-4">
+            <h3 class="font-bold mb-1">智能健身助手App</h3>
+            <p class="text-sm text-gray-600 mb-2">
+              基于React
+              Native开发的跨平台应用，提供个性化训练计划、饮食建议等功能。
+            </p>
+            <div class="flex flex-wrap gap-2 mb-3">
+              <span class="text-xs bg-blue-50 text-blue-600 px-2 py-1 rounded"
+                >React Native</span
+              >
+              <span class="text-xs bg-blue-50 text-blue-600 px-2 py-1 rounded"
+                >Firebase</span
+              >
+            </div>
+            <div class="flex gap-2">
+              <button
+                class="px-3 py-1 bg-blue-50 text-blue-600 rounded text-sm"
+              >
+                App Store
+              </button>
+              <button class="px-3 py-1 bg-blue-600 text-white rounded text-sm">
+                查看源码
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 项目3 -->
+        <div class="bg-white rounded-lg overflow-hidden shadow-sm card-hover">
+          <img
+            src="https://picsum.photos/400/250?random=3"
+            alt="企业设计系统"
+            class="w-full h-48 object-cover"
+          />
+          <div class="p-4">
+            <h3 class="font-bold mb-1">企业设计系统</h3>
+            <p class="text-sm text-gray-600 mb-2">
+              包含中后台设计规范的UI设计系统，提升团队协作效率。
+            </p>
+            <div class="flex flex-wrap gap-2 mb-3">
+              <span class="text-xs bg-blue-50 text-blue-600 px-2 py-1 rounded"
+                >Figma</span
+              >
+              <span class="text-xs bg-blue-50 text-blue-600 px-2 py-1 rounded"
+                >Vue3</span
+              >
+            </div>
+            <div class="flex gap-2">
+              <button
+                class="px-3 py-1 bg-blue-50 text-blue-600 rounded text-sm"
+              >
+                设计稿
+              </button>
+              <button class="px-3 py-1 bg-blue-600 text-white rounded text-sm">
+                组件库
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 项目4 -->
+        <div class="bg-white rounded-lg overflow-hidden shadow-sm card-hover">
+          <img
+            src="https://picsum.photos/400/250?random=4"
+            alt="CSS Grid布局"
+            class="w-full h-48 object-cover"
+          />
+          <div class="p-4">
+            <h3 class="font-bold mb-1">CSS Grid布局</h3>
+            <p class="text-sm text-gray-600 mb-2">
+              演示CSS Grid布局的响应式设计，支持多终端适配。
+            </p>
+            <div class="flex flex-wrap gap-2 mb-3">
+              <span class="text-xs bg-blue-50 text-blue-600 px-2 py-1 rounded"
+                >HTML5</span
+              >
+              <span class="text-xs bg-blue-50 text-blue-600 px-2 py-1 rounded"
+                >CSS3</span
+              >
+            </div>
+            <div class="flex gap-2">
+              <button
+                class="px-3 py-1 bg-blue-50 text-blue-600 rounded text-sm"
+              >
+                在线演示
+              </button>
+              <button class="px-3 py-1 bg-blue-600 text-white rounded text-sm">
+                GitHub
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 项目5 -->
+        <div class="bg-white rounded-lg overflow-hidden shadow-sm card-hover">
+          <img
+            src="https://picsum.photos/400/250?random=5"
+            alt="实时数据分析仪表板"
+            class="w-full h-48 object-cover"
+          />
+          <div class="p-4">
+            <h3 class="font-bold mb-1">实时数据分析仪表板</h3>
+            <p class="text-sm text-gray-600 mb-2">
+              支持多数据源的实时数据监控和分析平台。
+            </p>
+            <div class="flex flex-wrap gap-2 mb-3">
+              <span class="text-xs bg-blue-50 text-blue-600 px-2 py-1 rounded"
+                >React</span
+              >
+              <span class="text-xs bg-blue-50 text-blue-600 px-2 py-1 rounded"
+                >Python</span
+              >
+            </div>
+            <div class="flex gap-2">
+              <button
+                class="px-3 py-1 bg-blue-50 text-blue-600 rounded text-sm"
+              >
+                在线演示
+              </button>
+              <button class="px-3 py-1 bg-blue-600 text-white rounded text-sm">
+                部分源码
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 项目6 -->
+        <div class="bg-white rounded-lg overflow-hidden shadow-sm card-hover">
+          <img
+            src="https://picsum.photos/400/250?random=6"
+            alt="个性化旅游规划App"
+            class="w-full h-48 object-cover"
+          />
+          <div class="p-4">
+            <h3 class="font-bold mb-1">个性化旅游规划App</h3>
+            <p class="text-sm text-gray-600 mb-2">
+              基于用户偏好和时间规划旅游路线、景点推荐的移动应用。
+            </p>
+            <div class="flex flex-wrap gap-2 mb-3">
+              <span class="text-xs bg-blue-50 text-blue-600 px-2 py-1 rounded"
+                >Flutter</span
+              >
+              <span class="text-xs bg-blue-50 text-blue-600 px-2 py-1 rounded"
+                >社交功能</span
+              >
+            </div>
+            <div class="flex gap-2">
+              <button
+                class="px-3 py-1 bg-blue-50 text-blue-600 rounded text-sm"
+              >
+                Google Play
+              </button>
+              <button class="px-3 py-1 bg-blue-600 text-white rounded text-sm">
+                查看源码
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 统计模块 -->
+    <section
+      class="max-w-6xl mx-auto px-4 py-8 bg-gradient-to-r from-pink-50 to-purple-50 rounded-xl"
+    >
+      <div class="flex flex-wrap justify-center gap-6">
+        <div class="bg-white p-4 rounded-lg min-w-[80px] text-center">
+          <div class="text-2xl font-bold text-blue-600">15</div>
+          <div class="text-xs text-gray-600">完成项目</div>
+        </div>
+        <div class="bg-white p-4 rounded-lg min-w-[80px] text-center">
+          <div class="text-2xl font-bold text-blue-600">8</div>
+          <div class="text-xs text-gray-600">Web应用</div>
+        </div>
+        <div class="bg-white p-4 rounded-lg min-w-[80px] text-center">
+          <div class="text-2xl font-bold text-blue-600">4</div>
+          <div class="text-xs text-gray-600">移动应用</div>
+        </div>
+        <div class="bg-white p-4 rounded-lg min-w-[80px] text-center">
+          <div class="text-2xl font-bold text-blue-600">3</div>
+          <div class="text-xs text-gray-600">设计系统</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 工作流程 -->
+    <section class="max-w-6xl mx-auto px-4 py-12">
+      <h2 class="text-2xl font-bold text-center mb-8">我的工作流程</h2>
+      <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+        <!-- 流程1 -->
+        <div class="bg-white p-4 rounded-lg text-center shadow-sm">
+          <div
+            class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-2"
+          >
+            <i class="fas fa-lightbulb text-purple-600"></i>
+          </div>
+          <div class="font-bold text-sm mb-1">1. 需求分析</div>
+          <p class="text-xs text-gray-600">
+            与客户深入沟通，明确项目目标、用户需求和功能规划。
+          </p>
+        </div>
+        <!-- 流程2 -->
+        <div class="bg-white p-4 rounded-lg text-center shadow-sm">
+          <div
+            class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-2"
+          >
+            <i class="fas fa-pen text-purple-600"></i>
+          </div>
+          <div class="font-bold text-sm mb-1">2. 设计与原型</div>
+          <p class="text-xs text-gray-600">
+            创建用户流程图、线框和交互原型，确保用户体验最优。
+          </p>
+        </div>
+        <!-- 流程3 -->
+        <div class="bg-white p-4 rounded-lg text-center shadow-sm">
+          <div
+            class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-2"
+          >
+            <i class="fas fa-code text-purple-600"></i>
+          </div>
+          <div class="font-bold text-sm mb-1">3. 开发实现</div>
+          <p class="text-xs text-gray-600">
+            使用现代技术和最佳实践进行前后端开发，确保代码质量。
+          </p>
+        </div>
+        <!-- 流程4 -->
+        <div class="bg-white p-4 rounded-lg text-center shadow-sm">
+          <div
+            class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-2"
+          >
+            <i class="fas fa-wrench text-purple-600"></i>
+          </div>
+          <div class="font-bold text-sm mb-1">4. 测试优化</div>
+          <p class="text-xs text-gray-600">
+            进行多维度测试，优化性能，确保项目稳定可靠。
+          </p>
+        </div>
+        <!-- 流程5 -->
+        <div class="bg-white p-4 rounded-lg text-center shadow-sm">
+          <div
+            class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-2"
+          >
+            <i class="fas fa-rocket text-purple-600"></i>
+          </div>
+          <div class="font-bold text-sm mb-1">5. 部署维护</div>
+          <p class="text-xs text-gray-600">
+            部署到生产环境，提供持续维护和技术支持服务。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 技术栈 -->
+    <section class="max-w-6xl mx-auto px-4 py-8 mb-12">
+      <h2 class="text-2xl font-bold text-center mb-8">技术栈</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- 前端技术 -->
+        <div class="bg-white p-4 rounded-lg shadow-sm">
+          <div class="font-bold text-sm mb-3 flex items-center gap-2">
+            <i class="fas fa-desktop text-blue-600"></i>
+            <span>前端技术</span>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="text-xs bg-blue-50 text-blue-600 px-2 py-1 rounded"
+              >HTML/CSS3</span
+            >
+            <span class="text-xs bg-blue-50 text-blue-600 px-2 py-1 rounded"
+              >JavaScript(ES6+)</span
+            >
+            <span class="text-xs bg-blue-50 text-blue-600 px-2 py-1 rounded"
+              >React</span
+            >
+            <span class="text-xs bg-blue-50 text-blue-600 px-2 py-1 rounded"
+              >Vue.js</span
+            >
+            <span class="text-xs bg-blue-50 text-blue-600 px-2 py-1 rounded"
+              >TypeScript</span
+            >
+          </div>
+        </div>
+        <!-- 后端技术 -->
+        <div class="bg-white p-4 rounded-lg shadow-sm">
+          <div class="font-bold text-sm mb-3 flex items-center gap-2">
+            <i class="fas fa-server text-blue-600"></i>
+            <span>后端技术</span>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="text-xs bg-blue-50 text-blue-600 px-2 py-1 rounded"
+              >Node.js</span
+            >
+            <span class="text-xs bg-blue-50 text-blue-600 px-2 py-1 rounded"
+              >Python</span
+            >
+            <span class="text-xs bg-blue-50 text-blue-600 px-2 py-1 rounded"
+              >PostgreSQL</span
+            >
+            <span class="text-xs bg-blue-50 text-blue-600 px-2 py-1 rounded"
+              >MongoDB</span
+            >
+          </div>
+        </div>
+        <!-- 移动端 -->
+        <div class="bg-white p-4 rounded-lg shadow-sm">
+          <div class="font-bold text-sm mb-3 flex items-center gap-2">
+            <i class="fas fa-mobile-alt text-blue-600"></i>
+            <span>移动端</span>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="text-xs bg-blue-50 text-blue-600 px-2 py-1 rounded"
+              >React Native</span
+            >
+            <span class="text-xs bg-blue-50 text-blue-600 px-2 py-1 rounded"
+              >Flutter</span
+            >
+            <span class="text-xs bg-blue-50 text-blue-600 px-2 py-1 rounded"
+              >Swift</span
+            >
+          </div>
+        </div>
+        <!-- 工具与部署 -->
+        <div class="bg-white p-4 rounded-lg shadow-sm">
+          <div class="font-bold text-sm mb-3 flex items-center gap-2">
+            <i class="fas fa-tools text-blue-600"></i>
+            <span>工具与部署</span>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="text-xs bg-blue-50 text-blue-600 px-2 py-1 rounded"
+              >Git</span
+            >
+            <span class="text-xs bg-blue-50 text-blue-600 px-2 py-1 rounded"
+              >Docker</span
+            >
+            <span class="text-xs bg-blue-50 text-blue-600 px-2 py-1 rounded"
+              >Figma</span
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 合作模块 -->
+    <section
+      class="max-w-6xl mx-auto px-4 py-12 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl text-center"
+    >
+      <h2 class="text-2xl font-bold mb-2">有兴趣合作吗？</h2>
+      <p class="text-sm opacity-90 max-w-md mx-auto mb-6">
+        我正在寻找新的挑战和合作机会。如果你有有趣的项目想法，或者需要技术咨询，欢迎联系我。
+      </p>
+      <button class="px-4 py-2 bg-white text-blue-600 rounded-full font-medium">
+        开始合作
+      </button>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+      <div class="footer-container">
+        <!-- 快速链接部分 -->
+        <div class="footer-section">
+          <h3>快速链接</h3>
+          <ul class="footer-links">
+            <li>
+              <a href="/1个人信息 - 首页.html"
+                ><i class="fas fa-home"></i> 首页</a
+              >
+            </li>
+            <li>
+              <a href="/2博客表页.html"><i class="fas fa-blog"></i> 博客文章</a>
+            </li>
+            <li>
+              <a href="/4作品集.html"
+                ><i class="fas fa-briefcase"></i> 作品集</a
+              >
+            </li>
+            <li>
+              <a href="/5关于我.html"><i class="fas fa-user"></i> 关于我</a>
+            </li>
+            <li>
+              <a href="/3文章详情页.html"
+                ><i class="fas fa-envelope"></i> 文章详情页</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <!-- 订阅更新部分 -->
+        <div class="footer-section">
+          <h3>订阅更新</h3>
+          <p>订阅获取最新文章和技术分享</p>
+          <form class="subscribe-form">
+            <input
+              type="email"
+              class="email-input"
+              placeholder="输入您的邮箱"
+              required
+            />
+            <button type="submit" class="subscribe-btn">订阅</button>
+          </form>
+
+          <!-- 搜索框 -->
+          <h3 style="margin-top: 25px">搜索博客</h3>
+          <div class="search-box">
+            <input type="text" class="search-input" placeholder="搜索文章..." />
+            <button class="search-btn"><i class="fas fa-search"></i></button>
+          </div>
+        </div>
+
+        <!-- 社交链接部分 -->
+        <div class="footer-section">
+          <h3>关注我</h3>
+          <p>在这里可以找到我的更多分享</p>
+          <div class="social-links">
+            <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
+            <a href="#" title="知乎"><i class="fab fa-zhihu"></i></a>
+            <a href="#" title="微博"><i class="fab fa-weibo"></i></a>
+            <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" title="微信公众号"><i class="fab fa-weixin"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 底部版权信息 -->
+      <div class="footer-bottom">
+        <div class="copyright">
+          © xxx 保留所有权利。
+          <span class="designer">设计：胡洋铭</span>
+        </div>
+        <div class="copyright">
+          本博客由 xxx 驱动 | 已运行 <span id="days-counter">0</span> 天
+        </div>
+      </div>
+    </footer>
+    <script>
+      // 计算博客运行天数（从2026年1月8日开始）
+      document.addEventListener("DOMContentLoaded", function () {
+        const startDate = new Date("2026-01-08");
+        const currentDate = new Date();
+        const timeDiff = currentDate - startDate;
+        const daysDiff = Math.floor(timeDiff / (1000 * 3600 * 24));
+        document.getElementById("days-counter").textContent = daysDiff;
+
+        // 订阅表单提交处理
+        const subscribeForm = document.querySelector(".subscribe-form");
+        subscribeForm.addEventListener("submit", function (e) {
+          e.preventDefault();
+          const emailInput = this.querySelector(".email-input");
+          if (emailInput.value) {
+            alert(`感谢订阅！我们将发送更新到 ${emailInput.value}`);
+            emailInput.value = "";
+          }
+        });
+
+        // 搜索功能处理
+        const searchBtn = document.querySelector(".search-btn");
+        searchBtn.addEventListener("click", function () {
+          const searchInput = document.querySelector(".search-input");
+          if (searchInput.value.trim()) {
+            alert(`搜索: ${searchInput.value}`);
+          } else {
+            alert("请输入搜索关键词");
+          }
+        });
+
+        // 搜索框回车事件
+        const searchInput = document.querySelector(".search-input");
+        searchInput.addEventListener("keypress", function (e) {
+          if (e.key === "Enter") {
+            searchBtn.click();
+          }
+        });
+      });
+    </script>
+
+    <!-- 筛选交互JS -->
+    <script>
+      const filterBtns = document.querySelectorAll(".filter-btn");
+      filterBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          // 切换活跃状态
+          filterBtns.forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          // 这里可添加筛选逻辑（隐藏/显示对应分类项目）
+        });
+      });
+    </script>
+  </body>
+</html>
